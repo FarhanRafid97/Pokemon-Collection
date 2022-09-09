@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 
@@ -10,9 +10,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Navbar />
-      <Box padding="15px" w="full" pt={28}>
+      <Box padding="15px" w="full" pt={32}>
         <Sidebar />
-        {children}
+        <Flex
+          direction="column"
+          width={['100%', '100%', '100%', '75%']}
+          ml="auto"
+          alignItems="center"
+        >
+          {children}
+        </Flex>
       </Box>
     </>
   );

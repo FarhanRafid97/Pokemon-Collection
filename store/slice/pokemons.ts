@@ -1,13 +1,10 @@
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
 import { DocumentNode } from 'graphql';
 import { ClientError, gql, GraphQLClient } from 'graphql-request';
-import {
-  Pokemon_V2_Generation,
-  Pokemon_V2_Pokemon,
-} from '../../src/generated/graphql';
+import { Pokemon_V2_Generation, Pokemon_V2_Pokemon } from '../../src/generated/graphql';
 import { PokemonBase } from '../../src/types/pokemon';
 
-type FetchPokemon = {
+export type FetchPokemon = {
   pokemon_v2_pokemon: PokemonBase[];
 };
 
@@ -21,9 +18,7 @@ const pokemons = (): BaseQueryFn<
 > => {
   return async ({ document, variabless }) => {
     try {
-      const graphQLClient = new GraphQLClient(
-        'https://beta.pokeapi.co/graphql/v1beta'
-      );
+      const graphQLClient = new GraphQLClient('https://beta.pokeapi.co/graphql/v1beta');
       return { data: await graphQLClient.request(document, variabless) };
     } catch (error) {
       if (error instanceof ClientError) {
@@ -64,17 +59,18 @@ export const apiSlice = createApi({
         variables: { limit, offset },
       }),
     }),
-    detailPokemon: builder.query<FetchPokemon, { name: string }>({
-      query: ({ name }) => ({
+    detailPokemon: builder.query<FetchPokemon, { id: number }>({
+      query: ({ id }) => ({
         document: gql`
           query {
-            pokemon_v2_pokemon(where: { name: { _eq: ${name} } }) {
+            pokemon_v2_pokemon(where: { id: { _eq: ${id} } }) {
       id
       name
       height
       weight
       pokemon_v2_pokemontypes {
         pokemon_v2_type {
+          id
           name
         }
       }

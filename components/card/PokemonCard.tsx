@@ -9,11 +9,10 @@ interface PokemonCardProps {
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
-  console.log(pokemon.pokemon_v2_pokemonstats[0].base_stat);
   const PNG_IMAGE_URL =
     'https://cdn.statically.io/gh/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
   return (
-    <Link href={`/pokemon/detail/${pokemon.name}`} passHref>
+    <Link href={`/pokemon/detail/${pokemon.id}`} passHref>
       <Flex
         cursor="pointer"
         alignItems="center"
@@ -37,14 +36,10 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
           <Flex direction="column" p="20px" justifyContent="space-between">
             <Heading size="md">{snakeCase(pokemon.name)}</Heading>
             <Box>
-              <Text fontSize="14px">Type</Text>
+              <Text fontSize="14px">Type:</Text>
               <Flex columnGap="10px">
                 {pokemon.pokemon_v2_pokemontypes.map((type) => (
-                  <Text
-                    key={type.id}
-                    fontSize="14px"
-                    textTransform="capitalize"
-                  >
+                  <Text key={type.id} fontSize="14px" textTransform="capitalize">
                     {type.pokemon_v2_type?.name}
                   </Text>
                 ))}
@@ -62,11 +57,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
         </Flex>
         <Flex columnGap="13px" mt="auto">
           {pokemon.pokemon_v2_pokemonstats.map((poke) => (
-            <Icons
-              key={poke.id}
-              type={poke.pokemon_v2_stat?.name}
-              score={poke.base_stat}
-            />
+            <Icons key={poke.id} type={poke.pokemon_v2_stat?.name} score={poke.base_stat} />
           ))}
         </Flex>
       </Flex>

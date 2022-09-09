@@ -23,27 +23,25 @@ const Home: NextPage = () => {
   }, [data]);
   return (
     <Layout>
-      <Flex direction="column" width="75%" ml="auto" alignItems="center">
-        {isFetching && pokemons.length === 0 && (
-          <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />
-        )}
-        <Flex flexWrap="wrap" ml="auto" gap="15px">
-          {pokemons.map((pokemon) => (
-            <PokemonCard key={pokemon.id} pokemon={pokemon} />
-          ))}
+      {isFetching && pokemons.length === 0 && (
+        <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />
+      )}
+      <Flex flexWrap="wrap" ml="auto" gap="15px" justifyContent="center">
+        {pokemons.map((pokemon) => (
+          <PokemonCard key={pokemon.id} pokemon={pokemon} />
+        ))}
 
-          {pokemons.length > 0 && (
-            <Button
-              mt={15}
-              w="100%"
-              isLoading={isFetching}
-              colorScheme="teal"
-              onClick={() => setOffset(pokemons[pokemons.length - 1].id)}
-            >
-              LoadMore
-            </Button>
-          )}
-        </Flex>
+        {pokemons.length > 0 && (
+          <Button
+            mt={15}
+            w="100%"
+            isLoading={isFetching}
+            colorScheme="teal"
+            onClick={() => setOffset(pokemons[pokemons.length - 1].id)}
+          >
+            LoadMore
+          </Button>
+        )}
       </Flex>
     </Layout>
   );
