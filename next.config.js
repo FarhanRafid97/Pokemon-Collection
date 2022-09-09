@@ -2,6 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-}
+  images: {
+    domains: ['cdn.statically.io'],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
+// cdn.statically.io
