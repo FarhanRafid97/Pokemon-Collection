@@ -25,13 +25,7 @@ const Home: NextPage = () => {
     <Layout>
       <Flex direction="column" width="75%" ml="auto" alignItems="center">
         {isFetching && pokemons.length === 0 && (
-          <Spinner
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="blue.500"
-            size="xl"
-          />
+          <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />
         )}
         <Flex flexWrap="wrap" ml="auto" gap="15px">
           {pokemons.map((pokemon) => (
