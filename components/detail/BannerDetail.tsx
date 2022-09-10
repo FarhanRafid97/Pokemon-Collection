@@ -33,7 +33,7 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
   const name = data?.pokemon_v2_pokemon[0].pokemon_v2_pokemontypes.map((d) =>
     snakeCase(d.pokemon_v2_type?.name as string),
   );
-  console.log(value);
+
   const [isOpen, setIsOpen] = useState(false);
   const [isCatch, setIsCatch] = useState(false);
   const [isPlay, setIsplay] = useState(false);
@@ -59,7 +59,8 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
       setTimeout(() => {
         if (con === 'success') {
           toast({
-            title: 'Congratulation You Got New Pokemon',
+            title: 'Congratulation!!',
+            description: 'You Got New Pokemon',
             status: 'success',
             position: 'top',
             duration: 2000,

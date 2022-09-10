@@ -4,10 +4,15 @@ import { TiThMenuOutline } from 'react-icons/ti';
 import { MdOutlineBackpack } from 'react-icons/md';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { CgArrowsExchange } from 'react-icons/cg';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 interface SidebarProps {}
 
 const Sidebar: React.FC<SidebarProps> = ({}) => {
   const bgColor = useColorModeValue('gray.100', 'gray.600');
+  const router = useRouter();
+
+  const [active, setActive] = useState('');
   return (
     <Box
       position="fixed"
@@ -21,9 +26,11 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
       <Flex direction="column" rowGap="15px" mt="100px" w="100%" h="100%" p="15px">
         <Link href="/" passHref>
           <Flex
+            onClick={() => setActive('pokemon')}
             fontSize="18px"
             alignItems="center"
             columnGap="10px"
+            bg={router.pathname === '/' ? 'green.300' : undefined}
             _hover={{ bg: 'green.300', transition: '0.5s' }}
             cursor="pointer"
             borderRadius="7px"
@@ -34,7 +41,9 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
         </Link>
         <Link href="/collections" passHref>
           <Flex
+            onClick={() => setActive('collection')}
             fontSize="18px"
+            bg={router.pathname.includes('collections') ? 'green.300' : undefined}
             alignItems="center"
             columnGap="10px"
             _hover={{ bg: 'green.300', transition: '0.5s' }}
@@ -46,6 +55,7 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
           </Flex>
         </Link>
         <Flex
+          onClick={() => setActive('evolution')}
           fontSize="18px"
           alignItems="center"
           columnGap="10px"
