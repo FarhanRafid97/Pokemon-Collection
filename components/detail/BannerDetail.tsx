@@ -6,12 +6,12 @@ import { animate, motion } from 'framer-motion';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
 import { addPokemon } from '../../store/slice/collectionsPokemon';
+import { PNG_IMAGE_URL } from '../../src/constant/imageConst';
 
 interface BannerDetailProps {
   data: FetchPokemon | undefined;
 }
-const PNG_IMAGE_URL =
-  'https://cdn.statically.io/gh/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
+
 const variants = {
   open: {
     opacity: 1,
@@ -85,6 +85,7 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
   return (
     <Flex w="full">
       <Flex
+        borderRadius="8px"
         minH="600px"
         w="full"
         p="25px"

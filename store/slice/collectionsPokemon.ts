@@ -14,11 +14,7 @@ const collectionsSlice = createSlice({
   initialState,
   reducers: {
     addPokemon: (state, action) => {
-      console.log('state value', state);
-      console.log('state value 2', state.value);
-      console.log('action payload', action.payload);
       const isDuplicate = state.value.filter((data) => data.id === action.payload.id);
-      console.log('is duplicate', isDuplicate);
 
       state.value = isDuplicate.length !== 0 ? state.value : [...state.value, action.payload];
     },

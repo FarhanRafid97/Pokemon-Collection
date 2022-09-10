@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useAppDispatch } from '../../store/hook';
 import { deletePokemon } from '../../store/slice/collectionsPokemon';
+import { PNG_IMAGE_URL } from '../../src/constant/imageConst';
 interface PokemonCardProps {
   pokemon: PokemonBase;
   collection?: boolean;
@@ -14,9 +15,9 @@ interface PokemonCardProps {
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
   const dispatch = useAppDispatch();
-
-  const PNG_IMAGE_URL =
-    'https://cdn.statically.io/gh/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
+  const pokeTpye = pokemon.pokemon_v2_pokemontypes
+    .map((type) => snakeCase(type.pokemon_v2_type?.name as string))
+    .join(' / ');
 
   return (
     <Flex direction="column" position="relative">
@@ -26,13 +27,9 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
           alignItems="center"
           direction="column"
           w={340}
-          border="1px solid white"
           minH={220}
           p="25px 10px"
-          _hover={{
-            border: '1px solid black',
-            transition: '0.5s',
-          }}
+          _hover={{ bgBlendMode: 'saturation' }}
           color="white"
           borderRadius="10px"
           bgColor={`${pokemon?.pokemon_v2_pokemontypes[0]?.pokemon_v2_type?.name}`}
@@ -46,15 +43,11 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
               <Box>
                 <Text fontSize="14px">Type:</Text>
                 <Flex columnGap="10px">
-                  {pokemon.pokemon_v2_pokemontypes.map((type) => (
-                    <Text key={type.id} fontSize="14px" textTransform="capitalize">
-                      {type.pokemon_v2_type?.name}
-                    </Text>
-                  ))}
+                  <Text>{pokeTpye}</Text>
                 </Flex>
               </Box>
             </Flex>
-            <Box _hover={{ scale: 1.3 }}>
+            <Box>
               <Image
                 width={150}
                 height={150}
@@ -64,7 +57,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
             </Box>
           </Flex>
           <Flex columnGap="13px" mt="auto">
-            {pokemon.pokemon_v2_pokemonstats.map((poke) => (
+            {pokemon.pokemon_v2_pokemonstats.map((poke, i) => (
               <Icons key={poke.id} type={poke.pokemon_v2_stat?.name} score={poke.base_stat} />
             ))}
           </Flex>

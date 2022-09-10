@@ -1,8 +1,7 @@
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
 import { DocumentNode } from 'graphql';
 import { ClientError, gql, GraphQLClient } from 'graphql-request';
-import { Pokemon_V2_Generation, Pokemon_V2_Pokemon } from '../../src/generated/graphql';
-import { PokemonBase } from '../../src/types/pokemon';
+import { PokemonBase, PokemonEvolution } from '../../src/types/pokemon';
 
 export type FetchPokemon = {
   pokemon_v2_pokemon: PokemonBase[];
@@ -43,12 +42,14 @@ export const apiSlice = createApi({
               id
               height
               pokemon_v2_pokemonstats {
+              id
               base_stat
                 pokemon_v2_stat {
                 name
                 }
              }
               pokemon_v2_pokemontypes {
+                  id
                 pokemon_v2_type {
                   name
                  }
@@ -56,7 +57,30 @@ export const apiSlice = createApi({
             }
           }
         `,
-        variables: { limit, offset },
+      }),
+    }),
+    evolutionPokemon: builder.query<PokemonEvolution, { id: number }>({
+      query: ({ id }) => ({
+        document: gql`
+          query {
+            pokemon_v2_evolutionchain(
+              where: { pokemon_v2_pokemonspecies: { id: { _eq: ${id} } } }
+            ) {
+              id
+              pokemon_v2_pokemonspecies {
+                name
+                id
+                pokemon_v2_pokemonevolutions {
+                  min_level
+                  id
+                }
+                pokemon_v2_generation {
+                   name
+                 }
+              }
+            }
+          }
+        `,
       }),
     }),
     detailPokemon: builder.query<FetchPokemon, { id: number }>({
@@ -64,7 +88,7 @@ export const apiSlice = createApi({
         document: gql`
           query {
             pokemon_v2_pokemon(where: { id: { _eq: ${id} } }) {
-      id
+          id
       name
       height
       weight
@@ -108,4 +132,4 @@ export const apiSlice = createApi({
   }),
 });
 
-export const { useMyPokemonsQuery, useDetailPokemonQuery } = apiSlice;
+export const { useMyPokemonsQuery, useEvolutionPokemonQuery, useDetailPokemonQuery } = apiSlice;
