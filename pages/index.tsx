@@ -28,7 +28,7 @@ const Home: NextPage = () => {
       )}
       <Flex flexWrap="wrap" ml="auto" gap="15px" justifyContent="center">
         {pokemons.map((pokemon) => (
-          <PokemonCard key={pokemon.id} pokemon={pokemon} />
+          <PokemonCard key={pokemon.id} pokemon={pokemon} collection={false} />
         ))}
 
         {pokemons.length > 0 && (

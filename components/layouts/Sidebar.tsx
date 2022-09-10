@@ -32,17 +32,19 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
             <TiThMenuOutline /> <Text>Pokemon</Text>
           </Flex>
         </Link>
-        <Flex
-          fontSize="18px"
-          alignItems="center"
-          columnGap="10px"
-          _hover={{ bg: 'green.300', transition: '0.5s' }}
-          cursor="pointer"
-          borderRadius="7px"
-          p="3px 10px"
-        >
-          <MdOutlineBackpack /> <Text>Collection</Text>
-        </Flex>
+        <Link href="/collections" passHref>
+          <Flex
+            fontSize="18px"
+            alignItems="center"
+            columnGap="10px"
+            _hover={{ bg: 'green.300', transition: '0.5s' }}
+            cursor="pointer"
+            borderRadius="7px"
+            p="3px 10px"
+          >
+            <MdOutlineBackpack /> <Text>Collection</Text>
+          </Flex>
+        </Link>
         <Flex
           fontSize="18px"
           alignItems="center"

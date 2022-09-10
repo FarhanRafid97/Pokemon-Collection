@@ -75,8 +75,10 @@ export const apiSlice = createApi({
         }
       }
       pokemon_v2_pokemonstats {
-        stat_id
         base_stat
+                pokemon_v2_stat {
+                name
+                }
       }
       pokemon_v2_pokemonabilities {
         pokemon_v2_ability {

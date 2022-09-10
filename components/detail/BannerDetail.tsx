@@ -1,46 +1,87 @@
 import { FetchPokemon } from '../../store/slice/pokemons';
 import Image from 'next/image';
-import { Flex, Box, Heading, Text } from '@chakra-ui/react';
+import { Flex, Box, Heading, Text, Button, useToast } from '@chakra-ui/react';
 import { snakeCase } from '../../src/utils/snakeCase';
 import { animate, motion } from 'framer-motion';
 import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../store/hook';
+import { addPokemon } from '../../store/slice/collectionsPokemon';
+
 interface BannerDetailProps {
   data: FetchPokemon | undefined;
 }
+const PNG_IMAGE_URL =
+  'https://cdn.statically.io/gh/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
+
+const variants = {
+  open: {
+    opacity: 1,
+    x: [0, 400, 400, 600, 600, 450],
+
+    y: [0, -600, -600, -600, -600, -100],
+  },
+  closed: { opacity: 1, x: 0 },
+};
+const variant = {
+  open: { opacity: 1, scale: 0, x: -100, y: 100 },
+  closed: { opacity: 1, scale: 1 },
+};
 
 const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
+  const { value } = useAppSelector((state) => state.collectionPokemon);
+  const dispatch = useAppDispatch();
   const name = data?.pokemon_v2_pokemon[0].pokemon_v2_pokemontypes.map((d) =>
     snakeCase(d.pokemon_v2_type?.name as string),
   );
+  console.log(value);
   const [isOpen, setIsOpen] = useState(false);
   const [isCatch, setIsCatch] = useState(false);
+  const [isPlay, setIsplay] = useState(false);
+  const [condition, setCondition] = useState('');
 
-  const variants = {
-    open: {
-      opacity: 1,
-      x: [0, 400, 400, 600, 600, 450],
-
-      y: [0, -600, -600, -600, -600, -100],
-    },
-    closed: { opacity: 1, x: 0 },
-  };
-  const variant = {
-    open: { opacity: 1, scale: 0, x: -100, y: 100 },
-    closed: { opacity: 1, scale: 1 },
-  };
-
+  const toast = useToast();
   const catchPokemon = () => {
+    if (isPlay) return true;
+    const random = Math.floor(Math.random() * 10 + 1);
+    let con = '';
+    if (random === 1 || random === 3 || random == 8) {
+      dispatch(addPokemon(data?.pokemon_v2_pokemon[0]));
+      setCondition('success');
+      con = 'success';
+    } else {
+      setCondition('fail');
+      con = 'fail';
+    }
+    setIsplay(true);
     setIsOpen(true);
     setTimeout(() => {
       setIsCatch(true);
       setTimeout(() => {
+        if (con === 'success') {
+          toast({
+            title: 'Congratulation You Got New Pokemon',
+            status: 'success',
+            position: 'top',
+            duration: 2000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            title: 'Fail To get New Pokemon',
+            description: 'Better Luck Next Time',
+            status: 'error',
+            position: 'top',
+            duration: 2000,
+            isClosable: true,
+          });
+        }
         setIsOpen(false);
         setIsCatch(false);
-      }, 4000);
-    }, 1500);
+        setIsplay(false);
+      }, 1600);
+    }, 1800);
   };
-  const PNG_IMAGE_URL =
-    'https://cdn.statically.io/gh/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
+
   return (
     <Flex w="full">
       <Flex
@@ -79,14 +120,8 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
               </Box>
             </Flex>
             <Flex justifyContent="space-between" mt="auto" alignItems="center">
-              <Box
-                p="10px 25px"
-                borderRadius="25px"
-                cursor="pointer"
-                bg="whiteAlpha.700"
-                onClick={catchPokemon}
-              >
-                <Flex columnGap="15px" alignItems="center" position="relative">
+              <Button cursor="pointer" h="60px" bg="whiteAlpha.700" onClick={catchPokemon}>
+                <Flex columnGap="15px" alignItems="center">
                   <Box
                     as={motion.div}
                     w="50px"
@@ -102,9 +137,9 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
                       alt="pokemon png"
                     />
                   </Box>
-                  <Text color="black">Catch</Text>
+                  <Text color="black">Catch!!</Text>
                 </Flex>
-              </Box>
+              </Button>
               <Flex bg="whiteAlpha.600" borderRadius="12px" p="10px" color="black">
                 <Flex
                   justifyContent="center"
