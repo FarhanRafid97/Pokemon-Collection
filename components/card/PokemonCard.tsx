@@ -14,8 +14,10 @@ interface PokemonCardProps {
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
   const dispatch = useAppDispatch();
+
   const PNG_IMAGE_URL =
     'https://cdn.statically.io/gh/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
+
   return (
     <Flex direction="column" position="relative">
       <Link href={`/pokemon/detail/${pokemon.id}`} passHref>
@@ -57,7 +59,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
                 width={150}
                 height={150}
                 alt={`picture pokemon ${pokemon.name}`}
-                src={`${PNG_IMAGE_URL}/${pokemon.id}.png `}
+                src={`${PNG_IMAGE_URL}/${pokemon.id}.png`}
               />
             </Box>
           </Flex>
