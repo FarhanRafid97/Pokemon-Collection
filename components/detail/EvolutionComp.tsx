@@ -1,7 +1,6 @@
-import { Box, Heading, Flex } from '@chakra-ui/react';
+import { Box, Flex, Heading } from '@chakra-ui/react';
 import { Pokemon_V2_Pokemonspecies } from '../../src/generated/graphql';
 import EvolutionCard from '../card/EvolutionCard';
-import PokemonCard from '../card/PokemonCard';
 
 interface EvolutionCompProps {
   evolution: Pokemon_V2_Pokemonspecies[] | undefined;
@@ -20,7 +19,7 @@ const EvolutionComp: React.FC<EvolutionCompProps> = ({ evolution, type }) => {
       p="15px 10px 30px "
     >
       <Heading textAlign="center">Evolution Chain</Heading>
-      <Flex columnGap="35px" mt={8} justifyContent="center">
+      <Flex gap={['15px', '15px', '15px', '35px']} mt={8} flexWrap="wrap" justifyContent="center">
         {evolution?.map((evo) => (
           <EvolutionCard key={evo.id} pokemon={evo} type={type} />
         ))}

@@ -17,6 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           direction="column"
           width={['100%', '100%', '100%', '75%']}
           ml="auto"
+          mr={12}
           alignItems="center"
         >
           {children}

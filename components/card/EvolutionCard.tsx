@@ -1,7 +1,7 @@
 import { Pokemon_V2_Pokemonspecies } from '../../src/generated/graphql';
 import { Heading, Flex, Box, Text } from '@chakra-ui/react';
 import Image from 'next/image';
-import { PNG_IMAGE_URL } from '../../src/constant/imageConst';
+import { PNG_IMAGE_URL } from '../../src/constant/pokemon';
 import Link from 'next/link';
 import { snakeCase } from '../../src/utils/snakeCase';
 

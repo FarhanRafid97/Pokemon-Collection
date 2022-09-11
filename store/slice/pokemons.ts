@@ -1,10 +1,18 @@
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
 import { DocumentNode } from 'graphql';
 import { ClientError, gql, GraphQLClient } from 'graphql-request';
-import { PokemonBase, PokemonEvolution, PokemonSpecies } from '../../src/types/pokemon';
+import {
+  PokemonBase,
+  PokemonEvolution,
+  PokemonMove,
+  PokemonSpecies,
+} from '../../src/types/pokemon';
 
 export type FetchPokemon = {
   pokemon_v2_pokemon: PokemonBase[];
+};
+export type DetailPokemonType = {
+  pokemon_v2_pokemon: PokemonMove[];
 };
 
 const pokemons = (): BaseQueryFn<
@@ -111,7 +119,7 @@ export const apiSlice = createApi({
         `,
       }),
     }),
-    detailPokemon: builder.query<FetchPokemon, { id: number }>({
+    detailPokemon: builder.query<DetailPokemonType, { id: number }>({
       query: ({ id }) => ({
         document: gql`
           query {
@@ -141,6 +149,7 @@ export const apiSlice = createApi({
         }
       }
       pokemon_v2_pokemonmoves(distinct_on: move_id) {
+        id
         pokemon_v2_move {
           name
           type_id

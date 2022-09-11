@@ -13,12 +13,25 @@ export type PokemonBase = Pick<
   Pokemon_V2_Pokemon,
   'id' | 'name' | 'height' | 'weight' | 'pokemon_v2_pokemontypes' | 'pokemon_v2_pokemonstats'
 >;
+export type PokemonMove = Pick<
+  Pokemon_V2_Pokemon,
+  | 'id'
+  | 'name'
+  | 'height'
+  | 'weight'
+  | 'pokemon_v2_pokemontypes'
+  | 'pokemon_v2_pokemonstats'
+  | 'pokemon_v2_pokemonmoves'
+  | 'pokemon_v2_pokemonabilities'
+>;
 
 export type PokemonStats = Pick<Pokemon_V2_Pokemonstat, 'stat_id' | 'base_stat'>[];
 
-export type PokemonAbilities = {
-  pokemon_v2_ability: Pick<Pokemon_V2_Ability, 'name' | 'pokemon_v2_abilityeffecttexts'>;
-}[];
+export type PokemonAbilities =
+  | {
+      pokemon_v2_ability: Pick<Pokemon_V2_Ability, 'name' | 'pokemon_v2_abilityeffecttexts'>;
+    }[]
+  | undefined;
 
 export type PokemonEvolution = {
   pokemon_v2_evolutionchain: Pick<Pokemon_V2_Evolutionchain, 'id' | 'pokemon_v2_pokemonspecies'>[];

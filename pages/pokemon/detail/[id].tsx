@@ -3,11 +3,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import AbilitiesPokemon from '../../../components/detail/AbilitiesPokemon';
 import BannerDetail from '../../../components/detail/BannerDetail';
 import BaseStat from '../../../components/detail/BaseStat';
 import DescriptionCarousel from '../../../components/detail/DescriptionCarousel';
 import EvolutionComp from '../../../components/detail/EvolutionComp';
 import Habitat from '../../../components/detail/Habitat';
+import TableMove from '../../../components/detail/TableMove';
 import Layout from '../../../components/layouts/Layout';
 import {
   useDetailPokemonQuery,
@@ -19,14 +21,19 @@ interface PokemonDetailProps {}
 const PokemonDetail: React.FC<PokemonDetailProps> = ({}) => {
   const router = useRouter();
   const [indexCarousel, setIndexCarousel] = useState(0);
+
   const { data, isFetching } = useDetailPokemonQuery({ id: Number(router.query.id) });
+
   const { data: dataEvo, isFetching: isEvoFeth } = useEvolutionPokemonQuery({
     id: Number(router.query.id),
   });
+
   const { data: pokeSpecies, isFetching: isFetchPokeSpecies } = usePokemonSpeciesQuery({
     id: Number(router.query.id),
   });
+
   const species = pokeSpecies?.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemonspeciesflavortexts;
+  const pokemonType = data?.pokemon_v2_pokemon[0].pokemon_v2_pokemontypes[0].pokemon_v2_type?.name;
 
   if (data?.pokemon_v2_pokemon?.length === 0 && !isFetching) {
     return (
@@ -48,13 +55,20 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({}) => {
         <Flex direction="column" w="full" mt={8}>
           <EvolutionComp
             evolution={dataEvo?.pokemon_v2_evolutionchain[0].pokemon_v2_pokemonspecies}
-            type={data?.pokemon_v2_pokemon[0].pokemon_v2_pokemontypes[0].pokemon_v2_type?.name}
+            type={pokemonType}
           />
         </Flex>
       )}
 
-      <Flex mt={8} gap="20px" w="full" minH="100vh" alignItems="start">
-        <Flex direction="column" rowGap="20px" w="50%">
+      <Flex
+        mt={8}
+        gap="20px"
+        w="full"
+        direction={['column', 'column', 'row']}
+        minH="100vh"
+        alignItems="start"
+      >
+        <Flex direction="column" rowGap="20px" w={['100%', '100%', '50%']}>
           {isEvoFeth ? (
             <Skeleton h="150px" mt={8} w="full" />
           ) : (
@@ -105,25 +119,41 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({}) => {
               </Box>
             </Flex>
           )}
-          {isEvoFeth ? (
+          {isFetchPokeSpecies ? (
             <Skeleton w="full" h="150px" mt={8} />
           ) : (
             <Habitat
               name={pokeSpecies?.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemonhabitat?.name}
+              type={pokemonType}
+            />
+          )}
+          {isFetching ? (
+            <Skeleton w="full" h="26rem" mt={8} />
+          ) : (
+            <TableMove
+              move={data?.pokemon_v2_pokemon[0].pokemon_v2_pokemonmoves}
+              type={pokemonType}
             />
           )}
         </Flex>
 
-        <Flex direction="column" w="50%" rowGap="25px" justifyContent="start">
-          {isEvoFeth ? (
-            <Skeleton w="full" h="250px" mt={8} />
+        <Flex direction="column" w={['100%', '100%', '50%']} rowGap="25px" justifyContent="start">
+          {isFetching ? (
+            <Skeleton w="full" h="200px" mt={8} />
           ) : (
             <BaseStat
               baseStat={data?.pokemon_v2_pokemon[0].pokemon_v2_pokemonstats}
-              type={data?.pokemon_v2_pokemon[0].pokemon_v2_pokemontypes[0].pokemon_v2_type?.name}
+              type={pokemonType}
             />
           )}
-          <Flex w="100%" h="200px" bg="red" mt={4}></Flex>
+          {isFetching ? (
+            <Skeleton w="full" h="200px" mt={8} />
+          ) : (
+            <AbilitiesPokemon
+              abilities={data?.pokemon_v2_pokemon[0]?.pokemon_v2_pokemonabilities}
+              type={pokemonType}
+            />
+          )}
         </Flex>
       </Flex>
     </Layout>

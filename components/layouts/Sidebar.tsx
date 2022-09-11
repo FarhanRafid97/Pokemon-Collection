@@ -19,7 +19,7 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
       h="100vh"
       left="0"
       top="0"
-      w="22%"
+      w="20%"
       bg={bgColor}
       display={['none', 'none', 'none', 'block']}
     >

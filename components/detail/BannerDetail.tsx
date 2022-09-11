@@ -1,12 +1,12 @@
-import { FetchPokemon } from '../../store/slice/pokemons';
+import { Box, Button, Flex, Heading, Text, useToast } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Flex, Box, Heading, Text, Button, useToast } from '@chakra-ui/react';
-import { snakeCase } from '../../src/utils/snakeCase';
-import { animate, motion } from 'framer-motion';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hook';
+import { PNG_IMAGE_URL } from '../../src/constant/pokemon';
+import { snakeCase } from '../../src/utils/snakeCase';
+import { useAppDispatch } from '../../store/hook';
 import { addPokemon } from '../../store/slice/collectionsPokemon';
-import { PNG_IMAGE_URL } from '../../src/constant/imageConst';
+import { FetchPokemon } from '../../store/slice/pokemons';
 
 interface BannerDetailProps {
   data: FetchPokemon | undefined;
@@ -21,13 +21,13 @@ const variants = {
   },
   closed: { opacity: 1, x: 0 },
 };
+
 const variant = {
   open: { opacity: 1, scale: 0, x: -100, y: 100 },
   closed: { opacity: 1, scale: 1 },
 };
 
 const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
-  const { value } = useAppSelector((state) => state.collectionPokemon);
   const dispatch = useAppDispatch();
   const name = data?.pokemon_v2_pokemon[0].pokemon_v2_pokemontypes.map((d) =>
     snakeCase(d.pokemon_v2_type?.name as string),
@@ -39,10 +39,12 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
   const [condition, setCondition] = useState('');
 
   const toast = useToast();
+
   const catchPokemon = () => {
     if (isPlay) return true;
     const random = Math.floor(Math.random() * 10 + 1);
     let con = '';
+
     if (random === 1 || random === 3 || random == 8) {
       dispatch(addPokemon(data?.pokemon_v2_pokemon[0]));
       setCondition('success');
@@ -53,6 +55,7 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
     }
     setIsplay(true);
     setIsOpen(true);
+
     setTimeout(() => {
       setIsCatch(true);
       setTimeout(() => {
@@ -82,6 +85,8 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
     }, 1800);
   };
 
+  const paddingBox = ['5px 40px', '5px 40px', '5px 60px'];
+
   return (
     <Flex w="full">
       <Flex
@@ -99,8 +104,14 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
       >
         <Flex justifyContent="space-between" w="full">
           <Flex direction="column" w="full" h="full" pb="35px">
-            <Flex w="full" justifyContent="space-between" p="25px">
-              <Box>
+            <Flex
+              w="full"
+              direction={['column', 'column', 'row', 'row']}
+              justifyContent="space-between"
+              alignItems={['center', 'center', 'start', 'start']}
+              p="25px"
+            >
+              <Box mr="auto">
                 <Heading>{snakeCase(data?.pokemon_v2_pokemon[0]?.name as string)}</Heading>
                 <Heading>#{data?.pokemon_v2_pokemon[0].id}</Heading>
               </Box>
@@ -124,7 +135,7 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
               justifyContent="space-between"
               mt="auto"
               alignItems="center"
-              rowGap="15px"
+              rowGap={15}
               direction={['column', 'column-reverse', 'row']}
             >
               <Button cursor="pointer" h="60px" bg="whiteAlpha.700" onClick={catchPokemon}>
@@ -153,7 +164,7 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
                   direction="column"
                   alignItems="center"
                   borderRight="1px solid white"
-                  p="5px 60px"
+                  p={paddingBox}
                 >
                   <Flex columnGap="10px" mb="4px">
                     {data?.pokemon_v2_pokemon[0].pokemon_v2_pokemontypes.map((type) => (
@@ -170,15 +181,15 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
 
                   <Text fontSize="14px">Type</Text>
                 </Flex>
-                <Box p="5px 60px" borderRight="1px solid white">
-                  <Heading textAlign="center" size="lg">
+                <Box p={paddingBox} borderRight="1px solid white">
+                  <Heading textAlign="center" size={['md', 'md', 'lg']}>
                     {data?.pokemon_v2_pokemon[0].height}
                   </Heading>
                   <Text textAlign="center" fontSize="14px">
                     Height
                   </Text>
                 </Box>
-                <Box p="5px 60px">
+                <Box p={paddingBox}>
                   <Heading textAlign="center" size="lg">
                     {data?.pokemon_v2_pokemon[0].weight}
                   </Heading>
