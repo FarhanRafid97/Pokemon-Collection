@@ -4,6 +4,8 @@ import {
   Pokemon_V2_Evolutionchain,
   Pokemon_V2_Move,
   Pokemon_V2_Pokemon,
+  Pokemon_V2_Pokemonspecies,
+  Pokemon_V2_Pokemonspeciesflavortext,
   Pokemon_V2_Pokemonstat,
 } from '../generated/graphql';
 
@@ -17,6 +19,7 @@ export type PokemonStats = Pick<Pokemon_V2_Pokemonstat, 'stat_id' | 'base_stat'>
 export type PokemonAbilities = {
   pokemon_v2_ability: Pick<Pokemon_V2_Ability, 'name' | 'pokemon_v2_abilityeffecttexts'>;
 }[];
+
 export type PokemonEvolution = {
   pokemon_v2_evolutionchain: Pick<Pokemon_V2_Evolutionchain, 'id' | 'pokemon_v2_pokemonspecies'>[];
 };
@@ -27,6 +30,15 @@ export type PokemonMoves = {
     'name' | 'type_id' | 'power' | 'accuracy' | 'pp' | 'pokemon_v2_movedamageclass'
   >;
 }[];
+export type PokemonSpecies = {
+  pokemon_v2_pokemonspecies: [
+    Pick<Pokemon_V2_Pokemonspecies, 'id' | 'name'> & {
+      pokemon_v2_pokemonspeciesflavortexts: { id: number; flavor_text: string }[];
+      pokemon_v2_pokemonhabitat: Maybe<{ name: string }>;
+      pokemon_v2_pokemons: Pick<Pokemon_V2_Pokemon, 'id' | 'name' | 'pokemon_v2_pokemontypes'>[];
+    },
+  ];
+};
 
 export type MyPokemon = {
   id: number;

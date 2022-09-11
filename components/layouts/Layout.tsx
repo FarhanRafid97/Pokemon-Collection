@@ -10,9 +10,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Navbar />
-      <Box padding="15px" w="full" pt={32}>
+      <Box padding="15px" w="100vw" pt={32}>
         <Sidebar />
         <Flex
+          w="full"
           direction="column"
           width={['100%', '100%', '100%', '75%']}
           ml="auto"

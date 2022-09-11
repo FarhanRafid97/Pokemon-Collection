@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { PNG_IMAGE_URL } from '../../src/constant/imageConst';
 import Link from 'next/link';
 import { snakeCase } from '../../src/utils/snakeCase';
+
 type EvoPoke = Pick<
   Pokemon_V2_Pokemonspecies,
   'id' | 'name' | 'pokemon_v2_generation' | 'pokemon_v2_pokemonevolutions'
@@ -14,7 +15,6 @@ interface EvolutionCardProps {
 }
 
 const EvolutionCard: React.FC<EvolutionCardProps> = ({ pokemon, type }) => {
-  console.log(pokemon);
   return (
     <Link href={`/pokemon/detail/${pokemon?.id}`} passHref>
       <Flex

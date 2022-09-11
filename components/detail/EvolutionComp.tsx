@@ -13,7 +13,8 @@ const EvolutionComp: React.FC<EvolutionCompProps> = ({ evolution, type }) => {
     <Box
       w="100%"
       bg="white"
-      boxShadow="lg"
+      boxShadow="md"
+      minH="300px"
       border="1px solid #dbdbdb"
       borderRadius="8px"
       p="15px 10px 30px "

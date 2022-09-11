@@ -120,7 +120,13 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
                 />
               </Box>
             </Flex>
-            <Flex justifyContent="space-between" mt="auto" alignItems="center">
+            <Flex
+              justifyContent="space-between"
+              mt="auto"
+              alignItems="center"
+              rowGap="15px"
+              direction={['column', 'column-reverse', 'row']}
+            >
               <Button cursor="pointer" h="60px" bg="whiteAlpha.700" onClick={catchPokemon}>
                 <Flex columnGap="15px" alignItems="center">
                   <Box

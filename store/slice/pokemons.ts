@@ -1,7 +1,7 @@
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
 import { DocumentNode } from 'graphql';
 import { ClientError, gql, GraphQLClient } from 'graphql-request';
-import { PokemonBase, PokemonEvolution } from '../../src/types/pokemon';
+import { PokemonBase, PokemonEvolution, PokemonSpecies } from '../../src/types/pokemon';
 
 export type FetchPokemon = {
   pokemon_v2_pokemon: PokemonBase[];
@@ -83,6 +83,34 @@ export const apiSlice = createApi({
         `,
       }),
     }),
+    pokemonSpecies: builder.query<PokemonSpecies, { id: number }>({
+      query: ({ id }) => ({
+        document: gql`
+          query {
+            pokemon_v2_pokemonspecies(where: {id: {_eq: ${id}}}) {
+        id
+    name
+    pokemon_v2_pokemonspeciesflavortexts(where: {language_id: {_eq: 9}}) {
+      id
+      flavor_text
+    }
+    pokemon_v2_pokemonhabitat {
+      name
+    }
+    pokemon_v2_pokemons {
+      id
+      name
+      pokemon_v2_pokemontypes {
+        pokemon_v2_type {
+          name
+        }
+      }
+    }
+  }
+          }
+        `,
+      }),
+    }),
     detailPokemon: builder.query<FetchPokemon, { id: number }>({
       query: ({ id }) => ({
         document: gql`
@@ -132,4 +160,9 @@ export const apiSlice = createApi({
   }),
 });
 
-export const { useMyPokemonsQuery, useEvolutionPokemonQuery, useDetailPokemonQuery } = apiSlice;
+export const {
+  useMyPokemonsQuery,
+  useEvolutionPokemonQuery,
+  usePokemonSpeciesQuery,
+  useDetailPokemonQuery,
+} = apiSlice;
