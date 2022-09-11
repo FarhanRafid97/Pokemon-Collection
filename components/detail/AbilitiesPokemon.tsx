@@ -1,5 +1,5 @@
-import { Box, Flex, ListItem, Text, UnorderedList } from '@chakra-ui/react';
-import { GiIceSpellCast } from 'react-icons/gi';
+import { Heading, Box, Flex, ListItem, Text, UnorderedList } from '@chakra-ui/react';
+import { GiIceSpellCast, GiSpellBook } from 'react-icons/gi';
 import { Pokemon_V2_Pokemonability } from '../../src/generated/graphql';
 import { snakeCase } from '../../src/utils/snakeCase';
 interface AbilitiesPokemonProps {
@@ -17,7 +17,12 @@ const AbilitiesPokemon: React.FC<AbilitiesPokemonProps> = ({ abilities, type }) 
       borderRadius="8px"
       w="full"
     >
-      Pokemon Abilities
+      <Flex mb={4} alignItems="center" fontSize="28px" columnGap="15px">
+        <Heading size="lg">Pokemon Abilities</Heading>
+        <Box color={type}>
+          <GiSpellBook />
+        </Box>
+      </Flex>
       <UnorderedList spacing={3} mt={4}>
         {abilities?.map((abillity) => (
           <ListItem key={abillity.id}>

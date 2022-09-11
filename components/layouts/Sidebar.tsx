@@ -6,11 +6,13 @@ import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { CgArrowsExchange } from 'react-icons/cg';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { useAppSelector } from '../../store/hook';
 interface SidebarProps {}
 
 const Sidebar: React.FC<SidebarProps> = ({}) => {
-  const bgColor = useColorModeValue('gray.100', 'gray.600');
+  const bgColor = useColorModeValue('gray.50', 'gray.600');
   const router = useRouter();
+  const { value } = useAppSelector((state) => state.collectionPokemon);
 
   const [active, setActive] = useState('');
   return (
@@ -21,9 +23,10 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
       top="0"
       w="20%"
       bg={bgColor}
+      borderRight="1px solid #dbdbdb"
       display={['none', 'none', 'none', 'block']}
     >
-      <Flex direction="column" rowGap="15px" mt="100px" w="100%" h="100%" p="15px">
+      <Flex direction="column" rowGap="15px" mt="100px" ml="auto" w="90%" h="100%" p="15px" pt={12}>
         <Link href="/" passHref>
           <Flex
             onClick={() => setActive('pokemon')}
@@ -44,14 +47,18 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
             onClick={() => setActive('collection')}
             fontSize="18px"
             bg={router.pathname.includes('collections') ? 'green.300' : undefined}
-            alignItems="center"
-            columnGap="10px"
             _hover={{ bg: 'green.300', transition: '0.5s' }}
             cursor="pointer"
             borderRadius="7px"
+            justifyContent="space-between"
             p="3px 10px"
           >
-            <MdOutlineBackpack /> <Text>Collection</Text>
+            <Flex alignItems="center" columnGap="10px">
+              <MdOutlineBackpack /> <Text>Collection</Text>
+            </Flex>
+            <Box bg="red.500" borderRadius="8px" fontSize="12px" p="5px 9px" color="white">
+              {value.length}
+            </Box>
           </Flex>
         </Link>
         <Flex

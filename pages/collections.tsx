@@ -1,7 +1,8 @@
 import Layout from '../components/layouts/Layout';
-import { Flex, Box } from '@chakra-ui/react';
+import { Button, Flex, Box } from '@chakra-ui/react';
 import { useAppSelector } from '../store/hook';
 import PokemonCard from '../components/card/PokemonCard';
+import Link from 'next/link';
 
 interface CollectionsProps {}
 
@@ -11,7 +12,14 @@ const Collections: React.FC<CollectionsProps> = ({}) => {
   if (value.length === 0) {
     return (
       <Layout>
-        <Box>U dont Have Collection</Box>
+        <Flex direction="column">
+          <Box>Get Your First Pokemon</Box>
+          <Link href="/" passHref>
+            <Button colorScheme="telegram" mt={4}>
+              Search Pokemon
+            </Button>
+          </Link>
+        </Flex>
       </Layout>
     );
   }
