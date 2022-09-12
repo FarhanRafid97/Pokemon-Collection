@@ -8,7 +8,7 @@ interface HabitatProps {
 
 const Habitat: React.FC<HabitatProps> = ({ name, type }) => {
   return (
-    <Box w="full" border="1px solid #dbdbdb" boxShadow="lg" borderRadius="8px" p="20px" bg="white">
+    <Box w="full" border="1px solid #dbdbdb" boxShadow="lg" borderRadius="8px" p="20px">
       <Flex alignItems="center" columnGap="15px">
         <Heading size="lg"> Habitat</Heading>
         <Box color={type} fontSize="24px">

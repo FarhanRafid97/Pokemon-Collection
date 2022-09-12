@@ -27,7 +27,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
           alignItems="center"
           direction="column"
           w={340}
-          minH={220}
+          h={250}
           p="25px 10px"
           _hover={{ bgBlendMode: 'saturation' }}
           color="white"
@@ -40,8 +40,8 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
           <Flex w="full" justifyContent="space-between">
             <Flex direction="column" p="20px" justifyContent="space-between">
               <Heading size="md">{snakeCase(pokemon.name)}</Heading>
-              <Box>
-                <Text fontSize="14px">Type:</Text>
+              <Box fontSize={['12px', '12px', '12px', '16px']}>
+                <Text>Type:</Text>
                 <Flex columnGap="10px">
                   <Text>{pokeTpye}</Text>
                 </Flex>

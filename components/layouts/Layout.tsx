@@ -1,4 +1,5 @@
 import { Box, Flex } from '@chakra-ui/react';
+import BottomBar from './BottomBar';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 
@@ -10,7 +11,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Navbar />
-      <Box padding="15px" w="100vw" pt={32}>
+      <Box padding="10px" w="100vw" pt={32} pb={20}>
         <Sidebar />
         <Flex
           w="full"
@@ -23,6 +24,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           {children}
         </Flex>
       </Box>
+      <BottomBar />
     </>
   );
 };

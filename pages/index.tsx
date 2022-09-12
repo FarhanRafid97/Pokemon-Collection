@@ -34,12 +34,14 @@ const Home: NextPage = () => {
         {pokemons.length > 0 && (
           <Button
             mt={15}
-            w="100%"
+            w="200px"
             isLoading={isFetching}
-            colorScheme="teal"
+            backgroundColor="black"
+            color="white"
+            _hover={{ bg: 'rgb(0,0,0,0.75)' }}
             onClick={() => setOffset(pokemons[pokemons.length - 1].id)}
           >
-            LoadMore
+            Load More
           </Button>
         )}
       </Flex>

@@ -31,7 +31,7 @@ const BaseStat: React.FC<BaseStatProps> = ({ baseStat, type }) => {
               <Flex key={STATS_LABELS[i]} alignItems="center">
                 <Box w="40">{STATS_LABELS[i]}</Box>
                 <Box w="14">{stat.base_stat}</Box>
-                <Flex w="100%" bg="gray.300" h="2" borderRadius="15px">
+                <Flex w="100%" bg="gray.400" h="2" borderRadius="15px">
                   <Box
                     w={`${(stat.base_stat / MAX_BASE_STAT) * 100}%`}
                     borderRadius="15px"

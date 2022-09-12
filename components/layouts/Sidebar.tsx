@@ -10,11 +10,11 @@ import { useAppSelector } from '../../store/hook';
 interface SidebarProps {}
 
 const Sidebar: React.FC<SidebarProps> = ({}) => {
-  const bgColor = useColorModeValue('gray.50', 'gray.600');
+  const bgColor = useColorModeValue('gray.50', 'gray.700');
   const router = useRouter();
   const { value } = useAppSelector((state) => state.collectionPokemon);
+  const borderColor = useColorModeValue('#dbdbdb', 'black');
 
-  const [active, setActive] = useState('');
   return (
     <Box
       position="fixed"
@@ -23,18 +23,17 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
       top="0"
       w="20%"
       bg={bgColor}
-      borderRight="1px solid #dbdbdb"
+      borderRight={`1px solid ${borderColor}`}
       display={['none', 'none', 'none', 'block']}
     >
       <Flex direction="column" rowGap="15px" mt="100px" ml="auto" w="90%" h="100%" p="15px" pt={12}>
         <Link href="/" passHref>
           <Flex
-            onClick={() => setActive('pokemon')}
             fontSize="18px"
             alignItems="center"
             columnGap="10px"
-            bg={router.pathname === '/' ? 'green.300' : undefined}
-            _hover={{ bg: 'green.300', transition: '0.5s' }}
+            bg={router.pathname === '/' ? 'gray.300' : undefined}
+            _hover={{ bg: 'gray.300', transition: '0.5s' }}
             cursor="pointer"
             borderRadius="7px"
             p="3px 10px"
@@ -44,10 +43,9 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
         </Link>
         <Link href="/collections" passHref>
           <Flex
-            onClick={() => setActive('collection')}
             fontSize="18px"
-            bg={router.pathname.includes('collections') ? 'green.300' : undefined}
-            _hover={{ bg: 'green.300', transition: '0.5s' }}
+            bg={router.pathname.includes('collections') ? 'gray.300' : undefined}
+            _hover={{ bg: 'gray.300', transition: '0.5s' }}
             cursor="pointer"
             borderRadius="7px"
             justifyContent="space-between"
@@ -62,11 +60,10 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
           </Flex>
         </Link>
         <Flex
-          onClick={() => setActive('evolution')}
           fontSize="18px"
           alignItems="center"
           columnGap="10px"
-          _hover={{ bg: 'green.300', transition: '0.5s' }}
+          _hover={{ bg: 'gray.300', transition: '0.5s' }}
           cursor="pointer"
           borderRadius="7px"
           p="3px 10px"
@@ -77,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
           fontSize="18px"
           alignItems="center"
           columnGap="10px"
-          _hover={{ bg: 'green.300', transition: '0.5s' }}
+          _hover={{ bg: 'gray.300', transition: '0.5s' }}
           cursor="pointer"
           borderRadius="7px"
           p="3px 10px"

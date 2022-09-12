@@ -10,7 +10,6 @@ const DescriptionCarousel: React.FC<DescriptionCarouselProps> = ({ text, indexCa
       minW="full"
       p="5px"
       alignItems="center"
-      bg="white"
       px="15px"
       transition="1s"
       transform={`translateX(calc(-${indexCarousel}00% ))`}

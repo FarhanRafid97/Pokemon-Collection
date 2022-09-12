@@ -11,6 +11,7 @@ import {
   TableCaption,
   TableContainer,
   Heading,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { Box } from '@chakra-ui/react';
 import { BsArrowsMove } from 'react-icons/bs';
@@ -24,6 +25,7 @@ interface TableMoveProps {
 }
 
 const TableMove: React.FC<TableMoveProps> = ({ move, type }) => {
+  const tableHead = useColorModeValue('gray.100', 'gray.800');
   if (!move) {
     return <Box>Undefined</Box>;
   }
@@ -45,7 +47,7 @@ const TableMove: React.FC<TableMoveProps> = ({ move, type }) => {
       </Flex>
       <TableContainer maxH="26rem" overflowY="scroll">
         <Table size="sm">
-          <Thead position="sticky" bg="white" top="0">
+          <Thead position="sticky" bg={tableHead} top="0">
             <Tr>
               <Th>Name</Th>
               <Th>Type</Th>

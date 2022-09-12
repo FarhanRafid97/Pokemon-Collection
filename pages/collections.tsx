@@ -15,7 +15,7 @@ const Collections: React.FC<CollectionsProps> = ({}) => {
         <Flex direction="column">
           <Box>Get Your First Pokemon</Box>
           <Link href="/" passHref>
-            <Button colorScheme="telegram" mt={4}>
+            <Button backgroundColor="black" color="white" _hover={{ bg: 'rgb(0,0,0,0.75)' }} mt={4}>
               Search Pokemon
             </Button>
           </Link>
@@ -25,7 +25,7 @@ const Collections: React.FC<CollectionsProps> = ({}) => {
   }
   return (
     <Layout>
-      <Flex flexWrap="wrap" gap="15px" w="full">
+      <Flex flexWrap="wrap" gap="15px" w="full" justifyContent={['center', 'center', 'start']}>
         {value.map((pokemon) => (
           <PokemonCard key={pokemon.id} pokemon={pokemon} collection={true} />
         ))}

@@ -4,13 +4,22 @@ import { BsFillMoonStarsFill, BsFillSunFill } from 'react-icons/bs';
 interface NavbarProps {}
 const Navbar: React.FC<NavbarProps> = ({}) => {
   const { toggleColorMode } = useColorMode();
-  const bgColor = useColorModeValue('white', 'gray.600');
+  const bgColor = useColorModeValue('white', 'gray.700');
   const IconDarkMode = useColorModeValue(<BsFillMoonStarsFill />, <BsFillSunFill />);
+  const borderColor = useColorModeValue('#dbdbdb', 'black');
   return (
-    <Box w="full" p="15px" bg={bgColor} borderBottom="1px solid gray" position="fixed" zIndex="99">
+    <Box
+      w="full"
+      p="15px"
+      bg={bgColor}
+      borderBottom={`1px solid ${borderColor}`}
+      boxShadow="md"
+      position="fixed"
+      zIndex="99"
+    >
       <Flex w="90%" margin="auto" alignItems="center" justifyContent="space-between">
-        <Box>
-          <Image width={100} height={60} alt="logo for navbar" src="/logo.png" />
+        <Box width="170">
+          <Image width={150} height={50} alt="logo for navbar" src="/logo-nav.svg.png" />
         </Box>
         <Flex columnGap="15px">
           <Box onClick={toggleColorMode} cursor="pointer">
