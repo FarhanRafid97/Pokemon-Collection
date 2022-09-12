@@ -1,6 +1,6 @@
 import { Flex, useColorModeValue, Box } from '@chakra-ui/react';
 import { TiThMenuOutline } from 'react-icons/ti';
-import { MdOutlineBackpack } from 'react-icons/md';
+import { MdOutlineBackpack, MdOutlineQuestionAnswer } from 'react-icons/md';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { CgArrowsExchange } from 'react-icons/cg';
 import Link from 'next/link';
@@ -49,6 +49,17 @@ const BottomBar: React.FC<BottomBarProps> = ({}) => {
             _hover={{ bg: 'gray.200', transition: '0.4s' }}
           >
             <MdOutlineBackpack />
+          </Box>
+        </Link>
+        <Link href="/kuiz-pokemon" passHref>
+          <Box
+            fontSize="24px"
+            borderRadius="7px"
+            padding={['7px 15px', '7px 15px', '7px 45px']}
+            cursor="pointer"
+            _hover={{ bg: 'gray.200', transition: '0.4s' }}
+          >
+            <MdOutlineQuestionAnswer />
           </Box>
         </Link>
         <Box

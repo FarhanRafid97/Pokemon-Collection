@@ -15,12 +15,12 @@ const KuizPokemon: React.FC<KuizPokemonProps> = ({}) => {
   const [isDone, setIsdone] = useState(false);
   const [score, setScore] = useState(0);
   const { data, isFetching } = useKuizPokemonQuery({ id: num as number });
+
   useEffect(() => {
     setNum(Math.floor(Math.random() * 500 + 1));
     setIndexPoke(Math.floor(Math.random() * 4));
   }, []);
 
-  console.log(indexPok);
   const submitAnswer = (poke: { id: number; name: string }) => {
     if (isAnswer) {
       return;
