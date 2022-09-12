@@ -85,7 +85,7 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
     }, 1800);
   };
 
-  const paddingBox = ['5px 40px', '5px 40px', '5px 60px'];
+  const paddingBox = ['5px 20px', '5px 20px', '5px 60px'];
 
   return (
     <Flex w="full">
@@ -136,7 +136,7 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
               mt="auto"
               alignItems="center"
               rowGap={15}
-              direction={['column', 'column-reverse', 'row']}
+              direction={['column-reverse', 'column-reverse', 'row']}
             >
               <Button cursor="pointer" h="60px" bg="whiteAlpha.700" onClick={catchPokemon}>
                 <Flex columnGap="15px" alignItems="center">
@@ -164,7 +164,9 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
                   direction="column"
                   alignItems="center"
                   borderRight="1px solid white"
-                  p={paddingBox}
+                  p={['5px 20px', '5px 20px', '5px 40px']}
+                  fontSize={['12px', '12px', '14px', '16px']}
+                  w="full"
                 >
                   <Flex columnGap="10px" mb="4px">
                     {data?.pokemon_v2_pokemon[0].pokemon_v2_pokemontypes.map((type) => (
@@ -177,26 +179,32 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
                       />
                     ))}
                   </Flex>
-                  <Flex>{name?.join(' / ')}</Flex>
 
-                  <Text fontSize="14px">Type</Text>
+                  <Text w="full">{name?.join(' / ')}</Text>
+
+                  <Text>Type</Text>
                 </Flex>
-                <Box p={paddingBox} borderRight="1px solid white">
-                  <Heading textAlign="center" size={['md', 'md', 'lg']}>
+                <Flex
+                  direction="column"
+                  justifyContent="center"
+                  p={paddingBox}
+                  borderRight="1px solid white"
+                >
+                  <Heading textAlign="center" size={['xs', 'sm', 'md', 'lg']}>
                     {data?.pokemon_v2_pokemon[0].height}
                   </Heading>
-                  <Text textAlign="center" fontSize="14px">
+                  <Text textAlign="center" fontSize={['12px', '12px', '14px', '16px']}>
                     Height
                   </Text>
-                </Box>
-                <Box p={paddingBox}>
-                  <Heading textAlign="center" size="lg">
+                </Flex>
+                <Flex direction="column" justifyContent="center" p={paddingBox}>
+                  <Heading textAlign="center" size={['xs', 'sm', 'md', 'lg']}>
                     {data?.pokemon_v2_pokemon[0].weight}
                   </Heading>
-                  <Text textAlign="center" fontSize="14px">
+                  <Text textAlign="center" fontSize={['12px', '12px', '14px', '16px']}>
                     Weight
                   </Text>
-                </Box>
+                </Flex>
               </Flex>
             </Flex>
           </Flex>

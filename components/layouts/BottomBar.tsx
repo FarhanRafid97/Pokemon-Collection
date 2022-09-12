@@ -18,6 +18,7 @@ const BottomBar: React.FC<BottomBarProps> = ({}) => {
       boxShadow="md"
       position="fixed"
       bottom="0"
+      pb={4}
       display={['block', 'block', 'block', 'none']}
     >
       <Flex
