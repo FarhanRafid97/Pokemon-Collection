@@ -14,6 +14,12 @@ export type FetchPokemon = {
 export type DetailPokemonType = {
   pokemon_v2_pokemon: PokemonMove[];
 };
+export type KuizPokemon = {
+  pokemon_v2_pokemon: {
+    id: number;
+    name: string;
+  }[];
+};
 
 const pokemons = (): BaseQueryFn<
   {
@@ -86,6 +92,18 @@ export const apiSlice = createApi({
                    name
                  }
               }
+            }
+          }
+        `,
+      }),
+    }),
+    kuizPokemon: builder.query<KuizPokemon, { id: number }>({
+      query: ({ id }) => ({
+        document: gql`
+          query {
+            pokemon_v2_pokemon(limit: 4, offset: ${id}) {
+              id
+              name
             }
           }
         `,
@@ -174,4 +192,5 @@ export const {
   useEvolutionPokemonQuery,
   usePokemonSpeciesQuery,
   useDetailPokemonQuery,
+  useKuizPokemonQuery,
 } = apiSlice;

@@ -1,7 +1,7 @@
 import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react';
 import Link from 'next/link';
 import { TiThMenuOutline } from 'react-icons/ti';
-import { MdOutlineBackpack } from 'react-icons/md';
+import { MdOutlineBackpack, MdOutlineQuestionAnswer } from 'react-icons/md';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { CgArrowsExchange } from 'react-icons/cg';
 import { useState } from 'react';
@@ -57,6 +57,21 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
             <Box bg="red.500" borderRadius="8px" fontSize="12px" p="5px 9px" color="white">
               {value.length}
             </Box>
+          </Flex>
+        </Link>
+        <Link href="/kuiz-pokemon" passHref>
+          <Flex
+            fontSize="18px"
+            bg={router.pathname.includes('kuiz-pokemon') ? 'gray.300' : undefined}
+            _hover={{ bg: 'gray.300', transition: '0.5s' }}
+            cursor="pointer"
+            borderRadius="7px"
+            justifyContent="space-between"
+            p="3px 10px"
+          >
+            <Flex alignItems="center" columnGap="10px">
+              <MdOutlineQuestionAnswer /> <Text>Kuiz Pokemon</Text>
+            </Flex>
           </Flex>
         </Link>
         <Flex

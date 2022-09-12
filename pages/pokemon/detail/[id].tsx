@@ -50,9 +50,9 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({}) => {
     <Layout>
       {isFetching ? <Skeleton h="500px" w="full" /> : <BannerDetail data={data} />}
       {isEvoFeth ? (
-        <Skeleton h="300px" mt={8} w="full" />
+        <Skeleton h="300px" w="full" />
       ) : (
-        <Flex direction="column" w="full" mt={8}>
+        <Flex direction="column" mt={8} w="full">
           <EvolutionComp
             evolution={dataEvo?.pokemon_v2_evolutionchain[0].pokemon_v2_pokemonspecies}
             type={pokemonType}
@@ -70,7 +70,7 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({}) => {
       >
         <Flex direction="column" rowGap="20px" w={['100%', '100%', '50%']}>
           {isEvoFeth ? (
-            <Skeleton h="150px" mt={8} w="full" />
+            <Skeleton h="150px" w="full" />
           ) : (
             <Flex
               w="full"
@@ -120,7 +120,7 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({}) => {
             </Flex>
           )}
           {isFetchPokeSpecies ? (
-            <Skeleton w="full" h="150px" mt={8} />
+            <Skeleton w="full" h="150px" />
           ) : (
             <Habitat
               name={pokeSpecies?.pokemon_v2_pokemonspecies[0].pokemon_v2_pokemonhabitat?.name}
@@ -128,7 +128,7 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({}) => {
             />
           )}
           {isFetching ? (
-            <Skeleton w="full" h="26rem" mt={8} />
+            <Skeleton w="full" h="26rem" />
           ) : (
             <TableMove
               move={data?.pokemon_v2_pokemon[0].pokemon_v2_pokemonmoves}
@@ -139,7 +139,7 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({}) => {
 
         <Flex direction="column" w={['100%', '100%', '50%']} rowGap="25px" justifyContent="start">
           {isFetching ? (
-            <Skeleton w="full" h="200px" mt={8} />
+            <Skeleton w="full" h="200px" />
           ) : (
             <BaseStat
               baseStat={data?.pokemon_v2_pokemon[0].pokemon_v2_pokemonstats}
@@ -147,7 +147,7 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({}) => {
             />
           )}
           {isFetching ? (
-            <Skeleton w="full" h="200px" mt={8} />
+            <Skeleton w="full" h="200px" />
           ) : (
             <AbilitiesPokemon
               abilities={data?.pokemon_v2_pokemon[0]?.pokemon_v2_pokemonabilities}
