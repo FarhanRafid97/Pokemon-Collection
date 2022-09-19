@@ -27,7 +27,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
           alignItems="center"
           direction="column"
           w={340}
-          h={250}
+          h={210}
           p="25px 10px"
           _hover={{ bgBlendMode: 'saturation' }}
           color="white"
@@ -38,7 +38,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
           bgBlendMode="soft-light"
         >
           <Flex w="full" justifyContent="space-between">
-            <Flex direction="column" p="20px" justifyContent="space-between">
+            <Flex direction="column" p="10px" rowGap="5px" justifyContent="center">
               <Heading size="md">{snakeCase(pokemon.name)}</Heading>
               <Box fontSize={['12px', '12px', '12px', '16px']}>
                 <Text>Type:</Text>
@@ -49,8 +49,8 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
             </Flex>
             <Box>
               <Image
-                width={150}
-                height={150}
+                width={120}
+                height={120}
                 alt={`picture pokemon ${pokemon.name}`}
                 src={`${PNG_IMAGE_URL}/${pokemon.id}.png`}
               />

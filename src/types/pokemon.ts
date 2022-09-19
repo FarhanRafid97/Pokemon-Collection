@@ -4,6 +4,7 @@ import {
   Pokemon_V2_Evolutionchain,
   Pokemon_V2_Move,
   Pokemon_V2_Pokemon,
+  Pokemon_V2_Pokemonevolution,
   Pokemon_V2_Pokemonspecies,
   Pokemon_V2_Pokemonspeciesflavortext,
   Pokemon_V2_Pokemonstat,
@@ -35,6 +36,38 @@ export type PokemonAbilities =
 
 export type PokemonEvolution = {
   pokemon_v2_evolutionchain: Pick<Pokemon_V2_Evolutionchain, 'id' | 'pokemon_v2_pokemonspecies'>[];
+};
+
+export type PokemonEvolutionChain = {
+  pokemon_v2_pokemonspecies: [
+    Pick<Pokemon_V2_Pokemonspecies, 'id'> & {
+      pokemon_v2_pokemons: [{ pokemon_v2_pokemontypes: [{ pokemon_v2_type: { name: string } }] }];
+
+      pokemon_v2_evolutionchain: {
+        id: number;
+        pokemon_v2_pokemonspecies: [
+          Pick<Pokemon_V2_Pokemonspecies, 'name' | 'id'> & {
+            pokemon_v2_pokemonevolutions: Pick<Pokemon_V2_Pokemonevolution, 'min_level'>[];
+            pokemon_v2_generation: { name: string };
+          },
+        ];
+      };
+    },
+  ];
+};
+
+export type StateInput = {
+  id: number;
+  pokemon_v2_pokemons: [{ pokemon_v2_pokemontypes: [{ pokemon_v2_type: { name: string } }] }];
+  pokemon_v2_evolutionchain: {
+    id: number;
+    pokemon_v2_pokemonspecies: [
+      Pick<Pokemon_V2_Pokemonspecies, 'name' | 'id'> & {
+        pokemon_v2_pokemonevolutions: Pick<Pokemon_V2_Pokemonevolution, 'min_level'>[];
+        pokemon_v2_generation: { name: string };
+      },
+    ];
+  };
 };
 
 export type PokemonMoves = {

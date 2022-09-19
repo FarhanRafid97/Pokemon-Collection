@@ -74,17 +74,19 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
             </Flex>
           </Flex>
         </Link>
-        <Flex
-          fontSize="18px"
-          alignItems="center"
-          columnGap="10px"
-          _hover={{ bg: 'gray.300', transition: '0.5s' }}
-          cursor="pointer"
-          borderRadius="7px"
-          p="3px 10px"
-        >
-          <CgArrowsExchange /> <Text>Evolution</Text>
-        </Flex>
+        <Link href="/evolution" passHref>
+          <Flex
+            fontSize="18px"
+            alignItems="center"
+            columnGap="10px"
+            _hover={{ bg: 'gray.300', transition: '0.5s' }}
+            cursor="pointer"
+            borderRadius="7px"
+            p="3px 10px"
+          >
+            <CgArrowsExchange /> <Text>Evolution</Text>
+          </Flex>
+        </Link>
         <Flex
           fontSize="18px"
           alignItems="center"

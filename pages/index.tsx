@@ -21,6 +21,11 @@ const Home: NextPage = () => {
       setPokemons((e) => [...e, ...data.pokemon_v2_pokemon]);
     }
   }, [data]);
+  // const loadMoreRef = useIntersection({
+  //   rootMargin: '560px',
+  //   onEnter: () => setOffset(pokemons[pokemons.length - 1].id),
+  //   enabled: !isFetching,
+  // });
   return (
     <Layout>
       {isFetching && pokemons.length === 0 && (
@@ -45,6 +50,10 @@ const Home: NextPage = () => {
           </Button>
         )}
       </Flex>
+      {/* <div />
+      <div />
+
+      // <div ref={loadMoreRef} /> */}
     </Layout>
   );
 };

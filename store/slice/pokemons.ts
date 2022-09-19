@@ -4,6 +4,7 @@ import { ClientError, gql, GraphQLClient } from 'graphql-request';
 import {
   PokemonBase,
   PokemonEvolution,
+  PokemonEvolutionChain,
   PokemonMove,
   PokemonSpecies,
 } from '../../src/types/pokemon';
@@ -109,6 +110,35 @@ export const apiSlice = createApi({
         `,
       }),
     }),
+    evolutionChain: builder.query<PokemonEvolutionChain, { limit: number; offset: number }>({
+      query: ({ limit, offset }) => ({
+        document: gql`
+          query {
+            pokemon_v2_pokemonspecies(limit: ${limit}, offset: ${offset}) {
+              id
+              pokemon_v2_pokemons {
+      pokemon_v2_pokemontypes {
+        pokemon_v2_type {
+          name
+        }
+      }
+    }
+    
+              pokemon_v2_evolutionchain {
+                id
+                pokemon_v2_pokemonspecies {
+                  name
+                  id
+                  pokemon_v2_pokemonevolutions {
+          min_level
+        }
+                }
+              }
+            }
+          }
+        `,
+      }),
+    }),
     pokemonSpecies: builder.query<PokemonSpecies, { id: number }>({
       query: ({ id }) => ({
         document: gql`
@@ -193,4 +223,5 @@ export const {
   usePokemonSpeciesQuery,
   useDetailPokemonQuery,
   useKuizPokemonQuery,
+  useEvolutionChainQuery,
 } = apiSlice;
