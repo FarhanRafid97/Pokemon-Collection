@@ -1,13 +1,14 @@
-import { Button, Text, Heading, Flex, Box, Spinner } from '@chakra-ui/react';
-import Layout from '../components/layouts/Layout';
-import { useEvolutionChainQuery } from '../store/slice/pokemons';
+import { Box, Flex, Spinner, Text } from '@chakra-ui/react';
 import Image from 'next/image';
-import { PNG_IMAGE_URL } from '../src/constant/pokemon';
-import { BsArrowRight } from 'react-icons/bs';
-import { snakeCase } from '../src/utils/snakeCase';
-import { PokemonEvolutionChain, StateInput } from '../src/types/pokemon';
 import { useEffect, useState } from 'react';
+import { BsArrowRight } from 'react-icons/bs';
 import { useIntersection } from 'react-power-ups';
+import Layout from '../components/layouts/Layout';
+import { PNG_IMAGE_URL } from '../src/constant/pokemon';
+import { StateInput } from '../src/types/pokemon';
+import { snakeCase } from '../src/utils/snakeCase';
+import { useEvolutionChainQuery } from '../store/slice/pokemons';
+import Link from 'next/link';
 interface EvolutionProps {}
 
 const Evolution: React.FC<EvolutionProps> = ({}) => {
@@ -33,17 +34,20 @@ const Evolution: React.FC<EvolutionProps> = ({}) => {
 
   return (
     <Layout>
-      <Flex direction="column" w="full" rowGap="15px">
+      <Flex direction="column" w="full" rowGap="25px">
         {pokemons?.map((species) => {
           return (
             <Flex
-              w="80%"
+              w="90%"
               overflow="auto"
               m="auto"
               justifyContent="start"
               key={species.id}
-              pb={4}
+              p={4}
               borderBottom="1px"
+              borderColor={
+                species.pokemon_v2_pokemons[0].pokemon_v2_pokemontypes[0].pokemon_v2_type.name
+              }
             >
               {species.pokemon_v2_evolutionchain.pokemon_v2_pokemonspecies.map((evolution) => {
                 return (
@@ -69,15 +73,17 @@ const Evolution: React.FC<EvolutionProps> = ({}) => {
                         </Box>
                       </Flex>
                     )}
-                    <Flex direction="column" alignItems="center" bg="white">
-                      <Box flex="1" _hover={{ scale: 1.2 }}>
-                        <Image
-                          src={`${PNG_IMAGE_URL}/${evolution.id}.png`}
-                          width={150}
-                          height={140}
-                          alt={`image for pokemon ${snakeCase(evolution.name)} `}
-                        />
-                      </Box>
+                    <Flex direction="column" alignItems="center">
+                      <Link href={`/pokemon/detail/${evolution.id}`} passHref>
+                        <Box flex="1" cursor="pointer">
+                          <Image
+                            src={`${PNG_IMAGE_URL}/${evolution.id}.png`}
+                            width={130}
+                            height={130}
+                            alt={`image for pokemon ${snakeCase(evolution.name)} `}
+                          />
+                        </Box>
+                      </Link>
                       <Text
                         color="white"
                         bg={
