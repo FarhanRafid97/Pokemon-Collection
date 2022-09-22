@@ -62,6 +62,17 @@ const BottomBar: React.FC<BottomBarProps> = ({}) => {
             <MdOutlineQuestionAnswer />
           </Box>
         </Link>
+        <Link href="/evolution" passHref>
+          <Box
+            fontSize="24px"
+            borderRadius="7px"
+            padding={['7px 15px', '7px 15px', '7px 45px']}
+            cursor="pointer"
+            _hover={{ bg: 'gray.200', transition: '0.4s' }}
+          >
+            <CgArrowsExchange />
+          </Box>
+        </Link>
         <Box
           fontSize="24px"
           borderRadius="7px"
@@ -70,15 +81,6 @@ const BottomBar: React.FC<BottomBarProps> = ({}) => {
           _hover={{ bg: 'gray.200', transition: '0.4s' }}
         >
           <AiOutlineInfoCircle />
-        </Box>
-        <Box
-          fontSize="24px"
-          borderRadius="7px"
-          padding={['7px 15px', '7px 15px', '7px 45px']}
-          cursor="pointer"
-          _hover={{ bg: 'gray.200', transition: '0.4s' }}
-        >
-          <CgArrowsExchange />
         </Box>
       </Flex>
     </Box>

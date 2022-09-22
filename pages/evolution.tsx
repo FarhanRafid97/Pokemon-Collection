@@ -38,7 +38,7 @@ const Evolution: React.FC<EvolutionProps> = ({}) => {
         {pokemons?.map((species) => {
           return (
             <Flex
-              w="90%"
+              w={['100%', '90%', '90%', '90%']}
               overflow="auto"
               m="auto"
               justifyContent="start"
@@ -54,28 +54,28 @@ const Evolution: React.FC<EvolutionProps> = ({}) => {
                   <Flex key={evolution.id}>
                     {evolution.pokemon_v2_pokemonevolutions[0] && (
                       <Flex
-                        mx="45px"
+                        mx={['15px', '15px', '45px', '45px']}
                         direction="column"
                         px={4}
                         alignItems="center"
                         h="full"
                         justifyContent="center"
                       >
-                        <Text textAlign="center" fontSize="14px">
+                        <Text textAlign="center" fontSize={['14px', '10px', '14px', '14px']}>
                           Level
                           <br />
                           {evolution.pokemon_v2_pokemonevolutions[0]?.min_level
                             ? evolution.pokemon_v2_pokemonevolutions[0]?.min_level
                             : '∞'}{' '}
                         </Text>
-                        <Box fontSize="39px">
+                        <Box fontSize={['19px', '19px', '39px', '39px']}>
                           <BsArrowRight />
                         </Box>
                       </Flex>
                     )}
                     <Flex direction="column" alignItems="center">
                       <Link href={`/pokemon/detail/${evolution.id}`} passHref>
-                        <Box flex="1" cursor="pointer">
+                        <Box flex="1" w={[54, 62, 130, 130]} cursor="pointer">
                           <Image
                             src={`${PNG_IMAGE_URL}/${evolution.id}.png`}
                             width={130}
@@ -90,7 +90,8 @@ const Evolution: React.FC<EvolutionProps> = ({}) => {
                           species.pokemon_v2_pokemons[0].pokemon_v2_pokemontypes[0].pokemon_v2_type
                             .name
                         }
-                        p="3px 15px"
+                        p="3px 12px"
+                        fontSize={['10px', '10px', '10px', '10px']}
                         borderRadius="8px"
                       >
                         {snakeCase(evolution.name)}

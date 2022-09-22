@@ -31,7 +31,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
           p="25px 10px"
           _hover={{ bgBlendMode: 'saturation' }}
           color="white"
-          borderRadius="10px"
+          borderRadius="8px"
           bgColor={`${pokemon?.pokemon_v2_pokemontypes[0]?.pokemon_v2_type?.name}`}
           bgImage={`/pokemon-types/${pokemon.pokemon_v2_pokemontypes[0].pokemon_v2_type?.name}.svg`}
           bgSize="revert-layer"

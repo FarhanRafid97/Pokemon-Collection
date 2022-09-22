@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const theme = extendTheme({
     colors: {
       grass: '#52b788',
-      fire: '#bf0603',
+      fire: '#c1121f',
       water: '#83c5be',
       bug: '#3a5a40',
       normal: '#936639',

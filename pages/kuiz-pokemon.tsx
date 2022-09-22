@@ -72,10 +72,10 @@ const KuizPokemon: React.FC<KuizPokemonProps> = ({}) => {
       ) : (
         <Box
           bgImage={`${PNG_IMAGE_URL}/${data?.pokemon_v2_pokemon[indexPok as number]?.id}.png`}
-          w="400px"
+          w={['250px', '300px', '400px', '400px']}
           bgSize="contain"
           bgRepeat="no-repeat"
-          h="400px"
+          h={['250px', '300px', '400px', '400px']}
           filter={answer !== '' ? 'brightness(100%)' : 'brightness(0%)'}
         />
       )}
