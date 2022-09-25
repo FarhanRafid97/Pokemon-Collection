@@ -75,7 +75,7 @@ const Evolution: React.FC<EvolutionProps> = ({}) => {
                     )}
                     <Flex direction="column" alignItems="center">
                       <Link href={`/pokemon/detail/${evolution.id}`} passHref>
-                        <Box flex="1" w={[54, 62, 130, 130]} cursor="pointer">
+                        <Box flex="1" w={[54, 74, 110, 120]} cursor="pointer">
                           <Image
                             src={`${PNG_IMAGE_URL}/${evolution.id}.png`}
                             width={130}
@@ -91,7 +91,7 @@ const Evolution: React.FC<EvolutionProps> = ({}) => {
                             .name
                         }
                         p="3px 12px"
-                        fontSize={['10px', '10px', '10px', '10px']}
+                        fontSize={['10px', '10px', '14px', '14px']}
                         borderRadius="8px"
                       >
                         {snakeCase(evolution.name)}
