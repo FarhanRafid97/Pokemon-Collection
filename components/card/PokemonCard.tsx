@@ -34,12 +34,15 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
           borderRadius="8px"
           bgColor={`${pokemon?.pokemon_v2_pokemontypes[0]?.pokemon_v2_type?.name}`}
           bgImage={`/pokemon-types/${pokemon.pokemon_v2_pokemontypes[0].pokemon_v2_type?.name}.svg`}
-          bgSize="revert-layer"
+          bgPosition="center"
+          bgRepeat="no-repeat"
+          bgSize="130px"
           bgBlendMode="soft-light"
         >
           <Flex w="full" justifyContent="space-between">
             <Flex direction="column" p="10px" rowGap="5px" justifyContent="center">
               <Heading size="md">{snakeCase(pokemon.name)}</Heading>
+              <Heading size="md">#{pokemon.id}</Heading>
               <Box fontSize={['12px', '12px', '12px', '16px']}>
                 <Text>Type:</Text>
                 <Flex columnGap="10px">

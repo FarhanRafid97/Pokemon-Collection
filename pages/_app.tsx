@@ -18,6 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       fighting: '#6c6f7d',
       psychic: '#896279',
       rock: '#413620',
+      flying: '#a2d2ff',
       ghost: '#ccdde2',
       ice: '#90e0ef',
       dragon: '#fb8500',

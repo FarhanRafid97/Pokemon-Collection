@@ -38,64 +38,85 @@ const Evolution: React.FC<EvolutionProps> = ({}) => {
         {pokemons?.map((species) => {
           return (
             <Flex
-              w={['100%', '90%', '90%', '90%']}
+              w={['100%', '100%', '100%', '90%']}
               overflow="auto"
               m="auto"
               justifyContent="start"
               key={species.id}
-              p={4}
-              borderBottom="1px"
-              borderColor={
-                species.pokemon_v2_pokemons[0].pokemon_v2_pokemontypes[0].pokemon_v2_type.name
-              }
             >
               {species.pokemon_v2_evolutionchain.pokemon_v2_pokemonspecies.map((evolution) => {
                 return (
                   <Flex key={evolution.id}>
                     {evolution.pokemon_v2_pokemonevolutions[0] && (
                       <Flex
-                        mx={['15px', '15px', '45px', '45px']}
+                        mx={['4px', '5px', '10px', '10px']}
                         direction="column"
-                        px={4}
                         alignItems="center"
                         h="full"
                         justifyContent="center"
                       >
-                        <Text textAlign="center" fontSize={['14px', '10px', '14px', '14px']}>
+                        <Text textAlign="center" fontSize={['14px', '12px', '14px', '14px']}>
                           Level
                           <br />
                           {evolution.pokemon_v2_pokemonevolutions[0]?.min_level
                             ? evolution.pokemon_v2_pokemonevolutions[0]?.min_level
-                            : '∞'}{' '}
+                            : '∞'}
                         </Text>
-                        <Box fontSize={['19px', '19px', '39px', '39px']}>
+                        <Box fontSize={['19px', '19px', '29px', '29px']}>
                           <BsArrowRight />
                         </Box>
                       </Flex>
                     )}
-                    <Flex direction="column" alignItems="center">
+                    <Flex
+                      alignItems="center"
+                      boxShadow="md"
+                      border="1px"
+                      borderColor={
+                        species.pokemon_v2_pokemons[0].pokemon_v2_pokemontypes[0].pokemon_v2_type
+                          .name
+                      }
+                      p="10px 20px"
+                      w={['130px', '130px', '240px', '270px']}
+                      rowGap="15px"
+                      direction={['column', 'column', 'row', 'row']}
+                      justifyContent={['center', 'center', 'space-between', 'space-between']}
+                    >
+                      <Box>
+                        <Text
+                          mb={4}
+                          fontSize={['10px', '10px', '14px', '14px']}
+                          textAlign={['center', 'center', 'start', 'start']}
+                          borderRadius="8px"
+                        >
+                          {snakeCase(evolution.name)}
+                        </Text>
+                        <Flex>
+                          {species.pokemon_v2_pokemons[0].pokemon_v2_pokemontypes.map(
+                            (type, index) => (
+                              <Box
+                                color="white"
+                                p="5px 10px"
+                                fontSize="12px"
+                                key={index}
+                                m={['auto', 'auto', '0', '0']}
+                                bg={type.pokemon_v2_type.name}
+                              >
+                                {snakeCase(type.pokemon_v2_type.name)}
+                              </Box>
+                            ),
+                          )}
+                        </Flex>
+                      </Box>
                       <Link href={`/pokemon/detail/${evolution.id}`} passHref>
-                        <Box flex="1" w={[54, 74, 110, 120]} cursor="pointer">
+                        <Box w={['50px', '60px', '60px', '80px']} cursor="pointer" my="auto">
                           <Image
                             src={`${PNG_IMAGE_URL}/${evolution.id}.png`}
-                            width={130}
-                            height={130}
+                            width={80}
+                            height={80}
                             alt={`image for pokemon ${snakeCase(evolution.name)} `}
                           />
                         </Box>
                       </Link>
-                      <Text
-                        color="white"
-                        bg={
-                          species.pokemon_v2_pokemons[0].pokemon_v2_pokemontypes[0].pokemon_v2_type
-                            .name
-                        }
-                        p="3px 12px"
-                        fontSize={['10px', '10px', '14px', '14px']}
-                        borderRadius="8px"
-                      >
-                        {snakeCase(evolution.name)}
-                      </Text>
                     </Flex>
                   </Flex>
                 );
