@@ -2,18 +2,22 @@ import type { NextPage } from 'next';
 import { useMyPokemonsQuery } from '../store/slice/pokemons';
 import styles from '../styles/Home.module.css';
 import Layout from '../components/layouts/Layout';
-import { Box, Button, Spinner, Flex, Skeleton, Input } from '@chakra-ui/react';
+import { Text, Box, Button, Spinner, Heading, Flex, Skeleton, Input } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 import { PokemonBase } from '../src/types/pokemon';
 import PokemonCard from '../components/card/PokemonCard';
+import FilterPokemon from '../components/filter/FilterPokemon';
 
 const Home: NextPage = () => {
   const [pokemons, setPokemons] = useState<PokemonBase[]>([]);
   const [offset, setOffset] = useState(0);
+  const [name, setName] = useState('');
+  const [typeId, setTypeId] = useState<number | null>(null);
   const { data, isFetching } = useMyPokemonsQuery({
-    limit: 18,
-    offset: offset,
+    name,
+    typeId,
+    offset,
   });
 
   useEffect(() => {
@@ -24,8 +28,18 @@ const Home: NextPage = () => {
 
   return (
     <Layout>
-      <Flex mb={4}></Flex>
-      <Flex flexWrap="wrap" ml="auto" gap="15px" justifyContent="center">
+      <Text>{name}</Text>
+      <FilterPokemon
+        setName={setName}
+        name={name}
+        setPokemons={setPokemons}
+        setTypeId={setTypeId}
+        setOffset={setOffset}
+      />
+      <Flex flexWrap="wrap" w="full" gap="15px" justifyContent="center">
+        {!isFetching && pokemons.length === 0 && data?.pokemon_v2_pokemon.length === 0 && (
+          <Heading bg="red">No Pokemons</Heading>
+        )}
         {pokemons.map((pokemon) => (
           <PokemonCard key={pokemon.id} pokemon={pokemon} collection={false} />
         ))}
@@ -35,7 +49,9 @@ const Home: NextPage = () => {
         {isFetching && pokemons.length === 0 && (
           <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />
         )}
-        {pokemons.length > 0 && (
+      </Flex>
+      {pokemons.length < 0 ||
+        (data && data.pokemon_v2_pokemon!.length === 18 && !isFetching && (
           <Button
             mt={15}
             w="200px"
@@ -47,8 +63,7 @@ const Home: NextPage = () => {
           >
             Load More
           </Button>
-        )}
-      </Flex>
+        ))}
     </Layout>
   );
 };

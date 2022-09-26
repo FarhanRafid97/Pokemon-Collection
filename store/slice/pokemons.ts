@@ -2,6 +2,7 @@ import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
 import { DocumentNode } from 'graphql';
 import { ClientError, gql, GraphQLClient } from 'graphql-request';
 import {
+  FilterPokemon,
   PokemonBase,
   PokemonEvolution,
   PokemonEvolutionChain,
@@ -48,11 +49,17 @@ export const apiSlice = createApi({
   baseQuery: pokemons(),
   tagTypes: ['Pokemons'],
   endpoints: (builder) => ({
-    myPokemons: builder.query<FetchPokemon, { limit: number; offset: number }>({
-      query: ({ limit, offset = 0 }) => ({
+    myPokemons: builder.query<
+      FetchPokemon,
+      { name: string; typeId: number | null; offset: number }
+    >({
+      query: ({ name, typeId = 1, offset = 0 }) => ({
         document: gql`
           query {
-            pokemon_v2_pokemon(limit: ${limit}, offset: ${offset}) {
+            pokemon_v2_pokemon(  where: {
+          name: { _ilike: "%${name}%" } ${
+          typeId ? `, pokemon_v2_pokemontypes: {type_id: {_eq: ${typeId}}}` : ''
+        }},limit: ${18}, offset: ${offset}) {
               name
               id
               height
@@ -105,6 +112,24 @@ export const apiSlice = createApi({
             pokemon_v2_pokemon(limit: 4, offset: ${id}) {
               id
               name
+            }
+          }
+        `,
+      }),
+    }),
+    filterPokemon: builder.query<FilterPokemon, void>({
+      query: () => ({
+        document: gql`
+          query {
+            pokemon_v2_generation {
+              id
+              name
+            }
+            pokemon_v2_pokemontype(order_by: { type_id: asc }, distinct_on: type_id) {
+              pokemon_v2_type {
+                id
+                name
+              }
             }
           }
         `,
@@ -224,4 +249,5 @@ export const {
   useDetailPokemonQuery,
   useKuizPokemonQuery,
   useEvolutionChainQuery,
+  useFilterPokemonQuery,
 } = apiSlice;

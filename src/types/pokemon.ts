@@ -70,6 +70,15 @@ export type StateInput = {
   };
 };
 
+export type FilterPokemon = {
+  pokemon_v2_generation: {
+    id: number;
+    name: string;
+  }[];
+  pokemon_v2_pokemontype: {
+    pokemon_v2_type: { id: number; name: string };
+  }[];
+};
 export type PokemonMoves = {
   pokemon_v2_move: Pick<
     Pokemon_V2_Move,
