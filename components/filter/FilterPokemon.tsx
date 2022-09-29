@@ -9,11 +9,13 @@ interface FilterPokemonProps {
   name: string;
   setTypeId: Dispatch<SetStateAction<number | null>>;
   setOffset: Dispatch<SetStateAction<number>>;
+  setGen: Dispatch<SetStateAction<number>>;
 }
 
 const FilterPokemon: React.FC<FilterPokemonProps> = ({
   setName,
   setPokemons,
+  setGen,
   name,
   setOffset,
   setTypeId,
@@ -49,11 +51,12 @@ const FilterPokemon: React.FC<FilterPokemonProps> = ({
   return (
     <Box mr="auto" position="relative" minH="60px">
       <Flex
-        justifyContent="start"
+        bg={['red', 'red', 'red', 'white']}
+        justifyContent={['start', 'start', 'center', 'start']}
         position={!scrollState ? 'fixed' : 'relative'}
-        transition="0.4s"
-        top={!scrollState ? '20px' : ''}
+        top={!scrollState ? ['20px', '20px', '120px', '20px'] : ''}
         zIndex="99"
+        m="auto"
         columnGap="15px"
         px="7px"
       >
@@ -75,11 +78,26 @@ const FilterPokemon: React.FC<FilterPokemonProps> = ({
           onChange={(e) => {
             setOffset(0);
             setPokemons([]);
+            setGen(Number(e.target.value));
+          }}
+          w="150px"
+        >
+          <option value="">Gen</option>
+          {data?.pokemon_v2_generation.map((gen, i) => (
+            <option key={gen.id} value={gen.id}>
+              {gen.name}
+            </option>
+          ))}
+        </Select>
+        <Select
+          onChange={(e) => {
+            setOffset(0);
+            setPokemons([]);
             setTypeId(Number(e.target.value));
           }}
-          maxW="300px"
+          w="150px"
         >
-          <option value="">All Type</option>
+          <option value="">Type</option>
           {data?.pokemon_v2_pokemontype.map((type, i) => (
             <option key={type.pokemon_v2_type.id} value={type.pokemon_v2_type.id}>
               {type.pokemon_v2_type.name}

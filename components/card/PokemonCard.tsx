@@ -15,8 +15,9 @@ interface PokemonCardProps {
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
   const dispatch = useAppDispatch();
-  const pokeTpye = pokemon.pokemon_v2_pokemontypes
-    .map((type) => snakeCase(type.pokemon_v2_type?.name as string))
+
+  const pokeType = pokemon.pokemon_v2_pokemons[0].pokemon_v2_pokemontypes
+    .map((type) => type.pokemon_v2_type.name)
     .join(' / ');
 
   return (
@@ -31,9 +32,9 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
           p="25px 10px"
           _hover={{ bgBlendMode: 'saturation' }}
           color="white"
-          borderRadius="8px"
-          bgColor={`${pokemon?.pokemon_v2_pokemontypes[0]?.pokemon_v2_type?.name}`}
-          bgImage={`/pokemon-types/${pokemon.pokemon_v2_pokemontypes[0].pokemon_v2_type?.name}.svg`}
+          borderRadius="4px"
+          bgColor={`${pokemon.pokemon_v2_pokemons[0].pokemon_v2_pokemontypes[0].pokemon_v2_type.name}`}
+          bgImage={`/pokemon-types/${pokemon.pokemon_v2_pokemons[0].pokemon_v2_pokemontypes[0].pokemon_v2_type.name}.svg`}
           bgPosition="center"
           bgRepeat="no-repeat"
           bgSize="130px"
@@ -46,7 +47,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
               <Box fontSize={['12px', '12px', '12px', '16px']}>
                 <Text>Type:</Text>
                 <Flex columnGap="10px">
-                  <Text>{pokeTpye}</Text>
+                  <Text>{pokeType}</Text>
                 </Flex>
               </Box>
             </Flex>
@@ -60,8 +61,12 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, collection }) => {
             </Box>
           </Flex>
           <Flex columnGap="13px" mt="auto">
-            {pokemon.pokemon_v2_pokemonstats.map((poke, i) => (
-              <Icons key={poke.id} type={poke.pokemon_v2_stat?.name} score={poke.base_stat} />
+            {pokemon.pokemon_v2_pokemons[0].pokemon_v2_pokemonstats.map((poke, i) => (
+              <Icons
+                key={poke.pokemon_v2_stat.name}
+                type={poke.pokemon_v2_stat?.name}
+                score={poke.base_stat}
+              />
             ))}
           </Flex>
         </Flex>

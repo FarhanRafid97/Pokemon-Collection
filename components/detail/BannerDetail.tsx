@@ -3,11 +3,14 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
 import { PNG_IMAGE_URL } from '../../src/constant/pokemon';
+import { PokemonDetailType } from '../../src/types/pokemon';
 import { snakeCase } from '../../src/utils/snakeCase';
 import { useAppDispatch } from '../../store/hook';
 import { addPokemon } from '../../store/slice/collectionsPokemon';
-import { FetchPokemon } from '../../store/slice/pokemons';
 
+type FetchPokemon = {
+  pokemon_v2_pokemon: PokemonDetailType[];
+};
 interface BannerDetailProps {
   data: FetchPokemon | undefined;
 }
@@ -28,6 +31,17 @@ const variant = {
 };
 
 const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
+  const dataDispatch = {
+    id: data?.pokemon_v2_pokemon[0].id,
+    name: data?.pokemon_v2_pokemon[0].name,
+    pokemon_v2_pokemons: [
+      {
+        pokemon_v2_pokemonstats: data?.pokemon_v2_pokemon[0].pokemon_v2_pokemonstats,
+        pokemon_v2_pokemontypes: data?.pokemon_v2_pokemon[0].pokemon_v2_pokemontypes,
+      },
+    ],
+  };
+
   const dispatch = useAppDispatch();
   const name = data?.pokemon_v2_pokemon[0].pokemon_v2_pokemontypes.map((d) =>
     snakeCase(d.pokemon_v2_type?.name as string),
@@ -46,7 +60,7 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
     let con = '';
 
     if (random === 1 || random === 3 || random == 8) {
-      dispatch(addPokemon(data?.pokemon_v2_pokemon[0]));
+      dispatch(addPokemon(dataDispatch));
       setCondition('success');
       con = 'success';
     } else {

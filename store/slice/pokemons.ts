@@ -3,16 +3,13 @@ import { DocumentNode } from 'graphql';
 import { ClientError, gql, GraphQLClient } from 'graphql-request';
 import {
   FilterPokemon,
-  PokemonBase,
+  PokemonCardType,
   PokemonEvolution,
   PokemonEvolutionChain,
   PokemonMove,
   PokemonSpecies,
 } from '../../src/types/pokemon';
 
-export type FetchPokemon = {
-  pokemon_v2_pokemon: PokemonBase[];
-};
 export type DetailPokemonType = {
   pokemon_v2_pokemon: PokemonMove[];
 };
@@ -50,33 +47,45 @@ export const apiSlice = createApi({
   tagTypes: ['Pokemons'],
   endpoints: (builder) => ({
     myPokemons: builder.query<
-      FetchPokemon,
-      { name: string; typeId: number | null; offset: number }
+      PokemonCardType,
+      { name: string; typeId: number | null; offset: number; generationId: number }
     >({
-      query: ({ name, typeId = 1, offset = 0 }) => ({
+      query: ({ name, typeId = 1, generationId, offset = 0 }) => ({
         document: gql`
           query {
-            pokemon_v2_pokemon(  where: {
-          name: { _ilike: "%${name}%" } ${
-          typeId ? `, pokemon_v2_pokemontypes: {type_id: {_eq: ${typeId}}}` : ''
-        }},limit: ${18}, offset: ${offset}) {
-              name
-              id
-              height
-              pokemon_v2_pokemonstats {
-              id
-              base_stat
-                pokemon_v2_stat {
-                name
-                }
-             }
-              pokemon_v2_pokemontypes {
-                  id
-                pokemon_v2_type {
-                  name
-                 }
-              }
-            }
+            pokemon_v2_pokemonspecies(
+        order_by: { id: asc }
+        offset: ${offset}
+        where: {
+          name: { _ilike: "%${name}%" }
+          ${generationId ? `generation_id: { _eq: ${generationId} }` : ''}
+          ${
+            typeId
+              ? `pokemon_v2_pokemons: { pokemon_v2_pokemontypes: { type_id: { _eq: ${typeId} } } }`
+              : ''
+          }
+        }
+        limit: 18
+      ) {
+        id
+    name
+    pokemon_v2_pokemons {
+      pokemon_v2_pokemontypes {
+        pokemon_v2_type {
+          name
+          id
+        }
+      }
+      pokemon_v2_pokemonstats {
+        base_stat
+        pokemon_v2_stat {
+          name
+        }
+        id
+      }
+    
+  }
+      }
           }
         `,
       }),

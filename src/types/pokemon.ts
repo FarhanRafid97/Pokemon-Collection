@@ -10,10 +10,43 @@ import {
   Pokemon_V2_Pokemonstat,
 } from '../generated/graphql';
 
-export type PokemonBase = Pick<
+export type PokemonCardType = {
+  pokemon_v2_pokemonspecies: [
+    Pick<Pokemon_V2_Pokemonspecies, 'id' | 'name'> & {
+      pokemon_v2_pokemons: {
+        pokemon_v2_pokemonstats: [
+          { base_stat: number; id: number; pokemon_v2_stat: { name: string } },
+        ];
+
+        pokemon_v2_pokemontypes: {
+          pokemon_v2_type: {
+            id: NumberConstructor;
+            name: string;
+          };
+        }[];
+      }[];
+    },
+  ];
+};
+
+export type PokemonDetailType = Pick<
   Pokemon_V2_Pokemon,
   'id' | 'name' | 'height' | 'weight' | 'pokemon_v2_pokemontypes' | 'pokemon_v2_pokemonstats'
 >;
+export type PokemonBase = {
+  id: number;
+  name: string;
+  pokemon_v2_pokemons: {
+    pokemon_v2_pokemonstats: [{ base_stat: number; id: number; pokemon_v2_stat: { name: string } }];
+
+    pokemon_v2_pokemontypes: {
+      pokemon_v2_type: {
+        id: NumberConstructor;
+        name: string;
+      };
+    }[];
+  }[];
+};
 export type PokemonMove = Pick<
   Pokemon_V2_Pokemon,
   | 'id'

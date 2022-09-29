@@ -25,7 +25,7 @@ const AbilitiesPokemon: React.FC<AbilitiesPokemonProps> = ({ abilities, type }) 
       </Flex>
       <UnorderedList spacing={3} mt={4}>
         {abilities?.map((abillity) => (
-          <ListItem key={abillity.id}>
+          <ListItem key={abillity.pokemon_v2_ability?.name}>
             <Flex fontWeight="bold" fontSize="18px" alignItems="center" columnGap="10px">
               {snakeCase(abillity.pokemon_v2_ability?.name as string)}{' '}
               <Box fontSize="18px" color={type}>
