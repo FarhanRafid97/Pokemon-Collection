@@ -18,7 +18,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
       zIndex="99"
     >
       <Flex w="90%" margin="auto" alignItems="center" justifyContent="space-between">
-        <Box width="170">
+        <Box>
           <Image width={150} height={50} alt="logo for navbar" src="/logo-nav.svg.png" />
         </Box>
         <Flex columnGap="15px">
