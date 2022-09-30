@@ -48,11 +48,11 @@ const Home: NextPage = () => {
         setTypeId={setTypeId}
         setOffset={setOffset}
       />
-      <Flex flexWrap="wrap" w="full" gap="15px" justifyContent="center">
+      <Flex mt={[12, 12, 12, 0]} flexWrap="wrap" w="full" gap="15px" justifyContent="center">
         {!isFetching &&
           pokemons.length === 0 &&
           (data?.pokemon_v2_pokemonspecies?.length as number) === 0 && (
-            <Heading size="lg" mt={4}>{`Poekemon With Name "${name}" Not Found`}</Heading>
+            <Heading size="lg" mt={4}>{`Poekemon With Name "${name}"  Not Found`}</Heading>
           )}
         {pokemons.map((pokemon) => (
           <PokemonCard key={pokemon.id} pokemon={pokemon} collection={false} />
