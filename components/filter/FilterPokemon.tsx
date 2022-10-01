@@ -68,7 +68,7 @@ const FilterPokemon: React.FC<FilterPokemonProps> = ({
             ? ['relative', 'relative', 'relative', 'fixed']
             : ['relative', 'relative', 'relative', 'relative']
         }
-        top={['-41px', '-41px', '-41px', '20px']}
+        top={['-58px', '-55px', '-41px', '20px']}
         zIndex="99"
         m="auto"
         rowGap="5px"
@@ -112,7 +112,7 @@ const FilterPokemon: React.FC<FilterPokemonProps> = ({
               setGen(Number(e.target.value));
             }}
             fontSize={['12px', '12px', '16px', '16px']}
-            w={['100px', 'full', '200px', '150px']}
+            w={['full', 'full', '200px', '150px']}
           >
             <option value="">Gen</option>
             {data?.pokemon_v2_generation.map((gen, i) => (
@@ -129,7 +129,7 @@ const FilterPokemon: React.FC<FilterPokemonProps> = ({
               setTypeId(Number(e.target.value));
             }}
             fontSize={['12px', '12px', '16px', '16px']}
-            w={['100px', 'full', '200px', '150px']}
+            w={['full', 'full', '200px', '150px']}
           >
             <option value="">Type</option>
             {data?.pokemon_v2_pokemontype.map((type, i) => (

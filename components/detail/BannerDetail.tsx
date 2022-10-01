@@ -130,8 +130,8 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
                 <Heading>#{data?.pokemon_v2_pokemon[0].id}</Heading>
               </Box>
               <Box
-                w="350px"
-                h="350px"
+                w={['200px', '250px', '350px', '350px']}
+                h={['200px', '250px', '350px', '350px']}
                 as={motion.div}
                 animate={isCatch ? 'open' : 'closed'}
                 transition="0.2s ease-out"
@@ -149,7 +149,7 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
               justifyContent="space-between"
               mt="auto"
               alignItems="center"
-              rowGap={15}
+              rowGap={25}
               direction={['column-reverse', 'column-reverse', 'row']}
             >
               <Button cursor="pointer" h="60px" bg="whiteAlpha.700" onClick={catchPokemon}>

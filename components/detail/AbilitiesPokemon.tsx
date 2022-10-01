@@ -32,7 +32,9 @@ const AbilitiesPokemon: React.FC<AbilitiesPokemonProps> = ({ abilities, type }) 
                 <GiIceSpellCast />
               </Box>
             </Flex>
-            <Text mt="5px">Quidem, ipsam illum quis sed voluptatum quae eum fugit earum</Text>
+            <Text mt="5px">
+              {abillity?.pokemon_v2_ability?.pokemon_v2_abilityeffecttexts[0].short_effect}
+            </Text>
           </ListItem>
         ))}
       </UnorderedList>

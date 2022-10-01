@@ -15,7 +15,7 @@ const Habitat: React.FC<HabitatProps> = ({ name, type }) => {
           <GiHabitatDome />
         </Box>
       </Flex>
-      <Text mt={4}>{snakeCase(name as string)}</Text>
+      <Text mt={4}>{snakeCase(name as string) ?? 'Unknown'}</Text>
     </Box>
   );
 };
