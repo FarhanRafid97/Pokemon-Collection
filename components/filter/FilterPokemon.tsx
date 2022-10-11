@@ -26,16 +26,6 @@ const FilterPokemon: React.FC<FilterPokemonProps> = ({
   const [filter, setFilter] = useState(false);
   const { data } = useFilterPokemonQuery();
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (name === inputName) {
-      return false;
-    }
-    setOffset(0);
-    setPokemons([]);
-    setName(inputName);
-  };
-
   useEffect(() => {
     const scroll = window.addEventListener('scroll', () => {
       if (window.scrollY >= 105) {
@@ -49,6 +39,25 @@ const FilterPokemon: React.FC<FilterPokemonProps> = ({
       window.removeEventListener('scroll', scroll as any);
     };
   }, [scrollState]);
+
+  useEffect(() => {
+    const debounce = () => {
+      if (name === inputName) {
+        return false;
+      }
+      setOffset(0);
+      setPokemons([]);
+      setName(inputName);
+    };
+
+    const toDebounce = setTimeout(() => {
+      debounce();
+    }, 500);
+
+    return () => {
+      clearTimeout(toDebounce);
+    };
+  }, [inputName, name, setName, setOffset, setPokemons]);
 
   return (
     <Box
@@ -68,7 +77,7 @@ const FilterPokemon: React.FC<FilterPokemonProps> = ({
             ? ['relative', 'relative', 'relative', 'fixed']
             : ['relative', 'relative', 'relative', 'relative']
         }
-        top={['-58px', '-55px', '-41px', '20px']}
+        top={['-61px', '-55px', '-41px', '20px']}
         zIndex="99"
         m="auto"
         rowGap="5px"
@@ -76,29 +85,25 @@ const FilterPokemon: React.FC<FilterPokemonProps> = ({
         columnGap="15px"
         px="7px"
       >
-        <form onSubmit={onSubmit}>
-          <Flex w={['full', 'full', '300px', '300px']} alignItems="center">
-            <Input
-              placeholder="🔍 Search Pokemon"
-              size={['md', 'md', 'md', 'md']}
-              mr="5px"
-              borderColor="black"
-              value={inputName}
-              onChange={(e) => setInputName(e.target.value)}
-            />
-            <Button type="submit" colorScheme="teal">
-              🔍
-            </Button>
-            <Button
-              colorScheme="teal"
-              ml="5px"
-              display={['flex', 'flex', 'none', 'none']}
-              onClick={() => setFilter((e) => !e)}
-            >
-              <FiFilter />
-            </Button>
-          </Flex>
-        </form>
+        <Flex w={['full', 'full', '300px', '300px']} alignItems="center">
+          <Input
+            placeholder="🔍 Search Pokemon"
+            size={['md', 'md', 'md', 'md']}
+            mr="5px"
+            borderColor="black"
+            value={inputName}
+            onChange={(e) => setInputName(e.target.value)}
+          />
+
+          <Button
+            colorScheme="teal"
+            ml="5px"
+            display={['flex', 'flex', 'none', 'none']}
+            onClick={() => setFilter((e) => !e)}
+          >
+            <FiFilter />
+          </Button>
+        </Flex>
 
         <Flex
           columnGap="5px"
