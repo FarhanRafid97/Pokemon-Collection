@@ -8,6 +8,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { useAppDispatch } from '../../store/hook';
 import { deletePokemon } from '../../store/slice/collectionsPokemon';
 import { PNG_IMAGE_URL } from '../../src/constant/pokemon';
+
 interface PokemonCardProps {
   pokemon: PokemonBase;
   collection?: boolean;

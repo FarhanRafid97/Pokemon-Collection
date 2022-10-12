@@ -7,6 +7,7 @@ import { PokemonDetailType } from '../../src/types/pokemon';
 import { snakeCase } from '../../src/utils/snakeCase';
 import { useAppDispatch } from '../../store/hook';
 import { addPokemon } from '../../store/slice/collectionsPokemon';
+import CatchPokemon from './CatchPokemon';
 
 type FetchPokemon = {
   pokemon_v2_pokemon: PokemonDetailType[];
@@ -48,56 +49,56 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
   );
 
   const [isOpen, setIsOpen] = useState(false);
-  const [isCatch, setIsCatch] = useState(false);
   const [isPlay, setIsplay] = useState(false);
   const [condition, setCondition] = useState('');
+  const [isCatch, setIsCatch] = useState(false);
 
   const toast = useToast();
 
-  const catchPokemon = () => {
-    if (isPlay) return true;
-    const random = Math.floor(Math.random() * 10 + 1);
-    let con = '';
+  // const catchPokemon = () => {
+  //   if (isPlay) return true;
+  //   const random = Math.floor(Math.random() * 10 + 1);
+  //   let con = '';
 
-    if (random === 1 || random === 3 || random == 8) {
-      dispatch(addPokemon(dataDispatch));
-      setCondition('success');
-      con = 'success';
-    } else {
-      setCondition('fail');
-      con = 'fail';
-    }
-    setIsplay(true);
-    setIsOpen(true);
+  //   if (random === 1 || random === 3 || random == 8) {
+  //     dispatch(addPokemon(dataDispatch));
+  //     setCondition('success');
+  //     con = 'success';
+  //   } else {
+  //     setCondition('fail');
+  //     con = 'fail';
+  //   }
+  //   setIsplay(true);
+  //   setIsOpen(true);
 
-    setTimeout(() => {
-      setIsCatch(true);
-      setTimeout(() => {
-        if (con === 'success') {
-          toast({
-            title: 'Congratulation!!',
-            description: 'You Got New Pokemon',
-            status: 'success',
-            position: 'top',
-            duration: 2000,
-            isClosable: true,
-          });
-        } else {
-          toast({
-            title: 'Fail To get New Pokemon',
-            description: 'Better Luck Next Time',
-            status: 'error',
-            position: 'top',
-            duration: 2000,
-            isClosable: true,
-          });
-        }
-        setIsOpen(false);
-        setIsCatch(false);
-        setIsplay(false);
-      }, 1600);
-    }, 1800);
-  };
+  //   setTimeout(() => {
+  //     setIsCatch(true);
+  //     setTimeout(() => {
+  //       if (con === 'success') {
+  //         toast({
+  //           title: 'Congratulation!!',
+  //           description: 'You Got New Pokemon',
+  //           status: 'success',
+  //           position: 'top',
+  //           duration: 2000,
+  //           isClosable: true,
+  //         });
+  //       } else {
+  //         toast({
+  //           title: 'Fail To get New Pokemon',
+  //           description: 'Better Luck Next Time',
+  //           status: 'error',
+  //           position: 'top',
+  //           duration: 2000,
+  //           isClosable: true,
+  //         });
+  //       }
+  //       setIsOpen(false);
+  //       setIsCatch(false);
+  //       setIsplay(false);
+  //     }, 1600);
+  //   }, 1800);
+  // };
 
   const paddingBox = ['5px 20px', '5px 20px', '5px 60px'];
 
@@ -152,26 +153,10 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
               rowGap={25}
               direction={['column-reverse', 'column-reverse', 'row']}
             >
-              <Button cursor="pointer" h="60px" bg="whiteAlpha.700" onClick={catchPokemon}>
-                <Flex columnGap="15px" alignItems="center">
-                  <Box
-                    as={motion.div}
-                    w="50px"
-                    h="50px"
-                    animate={isOpen ? 'open' : 'closed'}
-                    transition="1s ease-out"
-                    variants={variants}
-                  >
-                    <Image
-                      src="/pokemon-awesome.png"
-                      width="50px"
-                      height="50px"
-                      alt="pokemon png"
-                    />
-                  </Box>
-                  <Text color="black">Catch!!</Text>
-                </Flex>
-              </Button>
+              <CatchPokemon
+                dataDispatch={dataDispatch}
+                imageUrl={`${PNG_IMAGE_URL}/${data?.pokemon_v2_pokemon[0].id}.png`}
+              />
               <Flex bg="whiteAlpha.600" borderRadius="12px" p="10px" color="black">
                 <Flex
                   justifyContent="center"

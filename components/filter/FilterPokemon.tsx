@@ -1,9 +1,8 @@
-import { Box, Button, Flex, Select, Input } from '@chakra-ui/react';
-import { Dispatch, FormEvent, SetStateAction, useEffect, useState } from 'react';
-import { filterType } from '../../src/constant/pokemon';
+import { Box, Button, Flex, Input, Select } from '@chakra-ui/react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { FiFilter } from 'react-icons/fi';
 import { PokemonBase } from '../../src/types/pokemon';
 import { useFilterPokemonQuery } from '../../store/slice/pokemons';
-import { FiFilter } from 'react-icons/fi';
 interface FilterPokemonProps {
   setName: Dispatch<SetStateAction<string>>;
   setPokemons: Dispatch<SetStateAction<PokemonBase[]>>;
@@ -69,7 +68,7 @@ const FilterPokemon: React.FC<FilterPokemonProps> = ({
       minH="60px"
     >
       <Flex
-        bg={['gray.100', 'gray.100', 'gray.100', 'white']}
+        bg={['gray.100', 'gray.100', 'gray.100', 'none']}
         p={2}
         justifyContent={['start', 'center', 'center', 'start']}
         position={
@@ -82,14 +81,13 @@ const FilterPokemon: React.FC<FilterPokemonProps> = ({
         m="auto"
         rowGap="5px"
         direction={['column', 'column', 'row', 'row']}
-        columnGap="15px"
+        columnGap="10px"
         px="7px"
       >
         <Flex w={['full', 'full', '300px', '300px']} alignItems="center">
           <Input
             placeholder="🔍 Search Pokemon"
             size={['md', 'md', 'md', 'md']}
-            mr="5px"
             borderColor="black"
             value={inputName}
             onChange={(e) => setInputName(e.target.value)}
@@ -106,7 +104,7 @@ const FilterPokemon: React.FC<FilterPokemonProps> = ({
         </Flex>
 
         <Flex
-          columnGap="5px"
+          columnGap="10px"
           display={[filter ? 'flex' : 'none', filter ? 'flex' : 'none', 'flex', 'flex']}
         >
           <Select

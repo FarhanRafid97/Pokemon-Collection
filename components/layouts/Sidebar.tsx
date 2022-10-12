@@ -78,6 +78,7 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
           <Flex
             fontSize="18px"
             alignItems="center"
+            bg={router.pathname.includes('evolution') ? 'gray.300' : undefined}
             columnGap="10px"
             _hover={{ bg: 'gray.300', transition: '0.5s' }}
             cursor="pointer"
