@@ -2,6 +2,8 @@ import { Box, Flex, Heading } from '@chakra-ui/react';
 import { Pokemon_V2_Pokemonstat } from '../../src/generated/graphql';
 import { ImStatsBars } from 'react-icons/im';
 import { MAX_BASE_STAT, STATS_LABELS } from '../../src/constant/pokemon';
+import { motion } from 'framer-motion';
+
 interface BaseStatProps {
   baseStat: Pokemon_V2_Pokemonstat[] | undefined;
   type: string | undefined;
@@ -33,7 +35,11 @@ const BaseStat: React.FC<BaseStatProps> = ({ baseStat, type }) => {
                 <Box w="14">{stat.base_stat}</Box>
                 <Flex w="100%" bg="gray.400" h="2" borderRadius="15px">
                   <Box
-                    w={`${(stat.base_stat / MAX_BASE_STAT) * 100}%`}
+                    as={motion.div}
+                    whileInView={{
+                      width: `${(stat.base_stat / MAX_BASE_STAT) * 100}%`,
+                      transition: { duration: 1, delay: i * 0.1 },
+                    }}
                     borderRadius="15px"
                     bg={`${type}`}
                   ></Box>

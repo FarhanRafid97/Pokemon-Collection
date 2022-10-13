@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { FiFilter } from 'react-icons/fi';
 import { PokemonBase } from '../../src/types/pokemon';
 import { useFilterPokemonQuery } from '../../store/slice/pokemons';
+
 interface FilterPokemonProps {
   setName: Dispatch<SetStateAction<string>>;
   setPokemons: Dispatch<SetStateAction<PokemonBase[]>>;

@@ -38,7 +38,7 @@ const variant = {
   catch: {
     opacity: 1,
     scale: [1, 2, 2, 1, 1],
-    y: [-60, -200, -60],
+    y: [0, -200, -60],
     x: 250,
     borderRadius: ['20%', '20%', '50%', '50%', '20%'],
   },
@@ -129,7 +129,18 @@ const CatchPokemon: React.FC<CatchPokemonProps> = ({ imageUrl, dataDispatch }) =
           <Box
             w="50px"
             h="50px"
-            transition="1s ease-out"
+            as={motion.div}
+            whileHover={{
+              y: [0, -60, 0],
+              transition: {
+                duration: 0.8,
+                ease: 'easeInOut',
+                repeat: Infinity,
+                repeatType: 'reverse',
+              },
+            }}
+            // @ts-ignore no problem in operation, although type error appears.
+
             // variants={variants}
           >
             <Image src="/pokemon-awesome.png" width="50px" height="50px" alt="pokemon png" />

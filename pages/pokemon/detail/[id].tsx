@@ -110,9 +110,10 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({}) => {
                   <AiOutlineArrowLeft />
                 </Box>
                 <Flex overflow="hidden" borderRadius="8px">
-                  {species?.map((text) => (
+                  {species?.map((text, i) => (
                     <DescriptionCarousel
                       key={text.id}
+                      isAnimation={i === indexCarousel}
                       text={text.flavor_text}
                       indexCarousel={indexCarousel}
                     />

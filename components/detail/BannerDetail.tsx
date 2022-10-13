@@ -1,12 +1,9 @@
-import { Box, Button, Flex, Heading, Text, useToast } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useState } from 'react';
 import { PNG_IMAGE_URL } from '../../src/constant/pokemon';
 import { PokemonDetailType } from '../../src/types/pokemon';
 import { snakeCase } from '../../src/utils/snakeCase';
-import { useAppDispatch } from '../../store/hook';
-import { addPokemon } from '../../store/slice/collectionsPokemon';
 import CatchPokemon from './CatchPokemon';
 
 type FetchPokemon = {
@@ -15,21 +12,6 @@ type FetchPokemon = {
 interface BannerDetailProps {
   data: FetchPokemon | undefined;
 }
-
-const variants = {
-  open: {
-    opacity: 1,
-    x: [0, 400, 400, 600, 600, 450],
-
-    y: [0, -600, -600, -600, -600, -100],
-  },
-  closed: { opacity: 1, x: 0 },
-};
-
-const variant = {
-  open: { opacity: 1, scale: 0, x: -100, y: 100 },
-  closed: { opacity: 1, scale: 1 },
-};
 
 const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
   const dataDispatch = {
@@ -43,62 +25,9 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
     ],
   };
 
-  const dispatch = useAppDispatch();
   const name = data?.pokemon_v2_pokemon[0].pokemon_v2_pokemontypes.map((d) =>
     snakeCase(d.pokemon_v2_type?.name as string),
   );
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [isPlay, setIsplay] = useState(false);
-  const [condition, setCondition] = useState('');
-  const [isCatch, setIsCatch] = useState(false);
-
-  const toast = useToast();
-
-  // const catchPokemon = () => {
-  //   if (isPlay) return true;
-  //   const random = Math.floor(Math.random() * 10 + 1);
-  //   let con = '';
-
-  //   if (random === 1 || random === 3 || random == 8) {
-  //     dispatch(addPokemon(dataDispatch));
-  //     setCondition('success');
-  //     con = 'success';
-  //   } else {
-  //     setCondition('fail');
-  //     con = 'fail';
-  //   }
-  //   setIsplay(true);
-  //   setIsOpen(true);
-
-  //   setTimeout(() => {
-  //     setIsCatch(true);
-  //     setTimeout(() => {
-  //       if (con === 'success') {
-  //         toast({
-  //           title: 'Congratulation!!',
-  //           description: 'You Got New Pokemon',
-  //           status: 'success',
-  //           position: 'top',
-  //           duration: 2000,
-  //           isClosable: true,
-  //         });
-  //       } else {
-  //         toast({
-  //           title: 'Fail To get New Pokemon',
-  //           description: 'Better Luck Next Time',
-  //           status: 'error',
-  //           position: 'top',
-  //           duration: 2000,
-  //           isClosable: true,
-  //         });
-  //       }
-  //       setIsOpen(false);
-  //       setIsCatch(false);
-  //       setIsplay(false);
-  //     }, 1600);
-  //   }, 1800);
-  // };
 
   const paddingBox = ['5px 20px', '5px 20px', '5px 60px'];
 
@@ -134,9 +63,16 @@ const BannerDetail: React.FC<BannerDetailProps> = ({ data }) => {
                 w={['200px', '250px', '350px', '350px']}
                 h={['200px', '250px', '350px', '350px']}
                 as={motion.div}
-                animate={isCatch ? 'open' : 'closed'}
-                transition="0.2s ease-out"
-                variants={variant}
+                whileInView={{
+                  y: [0, -20, 0],
+
+                  transition: {
+                    duration: 1.8,
+                    ease: 'easeInOut',
+                    repeat: Infinity,
+                    repeatType: 'reverse',
+                  },
+                }}
               >
                 <Image
                   width={350}
