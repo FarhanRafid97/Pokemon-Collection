@@ -11,13 +11,13 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
     <Box
       w="full"
       p="15px"
+      px="20px"
       bg={bgColor}
-      borderBottom={`1px solid ${borderColor}`}
-      boxShadow="md"
+      borderBottom={`0.5px solid #dbdbdb`}
       position="fixed"
       zIndex="99"
     >
-      <Flex w="90%" margin="auto" alignItems="center" justifyContent="space-between">
+      <Flex w="93%" margin="auto" alignItems="center" justifyContent="space-between">
         <Box w={['90px', '110px', '150px', '150px']}>
           <Image width={150} height={50} alt="logo for navbar" src="/logo-nav.svg.png" />
         </Box>

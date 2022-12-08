@@ -10,7 +10,7 @@ import { useAppSelector } from '../../store/hook';
 interface SidebarProps {}
 
 const Sidebar: React.FC<SidebarProps> = ({}) => {
-  const bgColor = useColorModeValue('gray.50', 'gray.700');
+  const bgColor = useColorModeValue('white', 'gray.700');
   const router = useRouter();
   const { value } = useAppSelector((state) => state.collectionPokemon);
   const borderColor = useColorModeValue('#dbdbdb', 'black');
@@ -21,12 +21,12 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
       h="100vh"
       left="0"
       top="0"
-      w="20%"
+      w="19%"
       bg={bgColor}
-      borderRight={`1px solid ${borderColor}`}
+      borderRight={`0.4px solid #dbdbdb`}
       display={['none', 'none', 'none', 'block']}
     >
-      <Flex direction="column" rowGap="15px" mt="100px" ml="auto" w="90%" h="100%" p="15px" pt={12}>
+      <Flex direction="column" rowGap="15px" mt="85px" w="100%" h="100%" p="15px" pt={12}>
         <Link href="/" passHref>
           <Flex
             fontSize="18px"
