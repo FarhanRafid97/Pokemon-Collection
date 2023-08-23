@@ -1,8 +1,11 @@
 import { Box, Flex, Text, useColorMode, useColorModeValue } from '@chakra-ui/react';
 import Image from 'next/image';
 import { BsFillMoonStarsFill, BsFillSunFill } from 'react-icons/bs';
+import { useAppSelector } from '../../store/hook';
 interface NavbarProps {}
 const Navbar: React.FC<NavbarProps> = ({}) => {
+  const pokemon = useAppSelector((state) => state.collectionPokemon);
+
   const { toggleColorMode } = useColorMode();
   const bgColor = useColorModeValue('white', 'gray.700');
   const IconDarkMode = useColorModeValue(<BsFillMoonStarsFill />, <BsFillSunFill />);
