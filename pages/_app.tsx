@@ -3,6 +3,12 @@ import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import { store } from '../store/store';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import nProgress from 'nprogress';
+import '../styles/nProgress.css';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+
+const progress = nProgress.configure({ showSpinner: false });
 
 const theme = extendTheme({
   colors: {
@@ -28,6 +34,20 @@ const theme = extendTheme({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
+  useEffect(() => {
+    // NProgress
+    router.events.on('routeChangeStart', () => progress.start());
+    router.events.on('routeChangeComplete', () => progress.done());
+    router.events.on('routeChangeError', () => progress.done());
+
+    return () => {
+      router.events.off('routeChangeStart', () => progress.start());
+      router.events.off('routeChangeComplete', () => progress.done());
+      router.events.off('routeChangeError', () => progress.done());
+    };
+  }, [router.events]);
   return (
     <Provider store={store}>
       <ChakraProvider theme={theme}>
